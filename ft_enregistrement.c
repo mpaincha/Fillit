@@ -6,7 +6,7 @@
 /*   By: mpaincha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/08 10:55:28 by mpaincha          #+#    #+#             */
-/*   Updated: 2015/12/08 15:33:26 by mpaincha         ###   ########.fr       */
+/*   Updated: 2015/12/08 17:21:36 by kvignau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,28 @@ void	ft_nettoyage(char *piece)
 {
 	int		i;
 
-	i = 0;
-	if (piece[0] == '.' && piece[4] == '.' && piece[8] == '.' && piece[12] == '.')
+	while (piece[0] == '.' && piece[4] == '.' && piece[8] == '.' && piece[12] == '.')
 	{
-		while (piece[i])
-		{
-			if (1 <= i && i <= 3)
-				piece[i - 1] = piece[i];
-			if (5 <= i && i <= 8)
-				piece[i - 1] = piece[i];
-			if (1 <= i && i <= 3)
-				piece[i - 1] = piece[i];
-
-		}
+		ft_memmove(piece, piece + 1, 3);
+		piece[3] = '.';
+		ft_memmove(piece + 4, piece + 5, 3);
+		piece[7] = '.';
+		ft_memmove(piece + 8, piece + 9, 3);
+		piece[11] = '.';
+		ft_memmove(piece + 12, piece + 13, 3);
+		piece[15] = '.';
 	}
-
+	piece[16] = '\0';
+	i = 12;
+	while (piece[0] == '.' && piece[1] == '.' && piece[2] == '.' && piece[3] == '.')
+	{
+		ft_memmove(piece, piece + 4, 12);
+		while (i <= 15)
+			piece[i++] = '.';
+	}
+		ft_putchar('\n');
+		ft_putstr(piece);
+		ft_putchar('\n');
 }
 
 void	ft_enregistrement(char	*buf)
