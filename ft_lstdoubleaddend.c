@@ -1,25 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lstdoubleaddend.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mpaincha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/12/07 15:27:52 by mpaincha          #+#    #+#             */
-/*   Updated: 2015/12/08 10:04:34 by mpaincha         ###   ########.fr       */
+/*   Created: 2015/12/08 13:33:06 by mpaincha          #+#    #+#             */
+/*   Updated: 2015/12/08 13:53:34 by mpaincha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-int		main(int ac, char **av)
+void	ft_lstdoubleaddend(t_doublelist **alst, t_doublelist *new)
 {
-	if (ac == 2)
-	{
-		if (ft_validite_fichier(av[1]) == -1)
-			ft_putstr("error\n");
-		else
-			ft_putstr("nikel");
-	}
-	return (0);
+	new->prev = *alst;
+	new->next = NULL;
+	*alst = new;
 }
