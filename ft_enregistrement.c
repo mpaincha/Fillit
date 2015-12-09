@@ -6,11 +6,19 @@
 /*   By: mpaincha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/08 10:55:28 by mpaincha          #+#    #+#             */
-/*   Updated: 2015/12/08 17:21:36 by kvignau          ###   ########.fr       */
+/*   Updated: 2015/12/09 14:57:40 by mpaincha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
+
+void		ft_testexist(t_dbllist **list_piece, char *piece)
+{
+	t_dbllist	*new_piece;
+	
+	new_piece = ft_lstdblnew(piece, ft_strlen(piece));
+	ft_lstdbladd(list_piece, new_piece);
+}
 
 void	ft_nettoyage(char *piece)
 {
@@ -35,37 +43,36 @@ void	ft_nettoyage(char *piece)
 		while (i <= 15)
 			piece[i++] = '.';
 	}
-		ft_putchar('\n');
-		ft_putstr(piece);
-		ft_putchar('\n');
 }
 
-void	ft_enregistrement(char	*buf)
+void	ft_enregistrement(char	*buf, t_dbllist **list_piece)
 {
-	char	*piece;
-	int		nbpoint;
-	int		i;
-	int		j;
+	char		piece[16];
+	int			nbpoint;
+	int			i;
+	int			j;
 
 	i = 0;
 	j = 0;
 	nbpoint = 0;
+	ft_strclr(piece);
 	//ft_memcpy(piece, buf, 20);
-	// reconnaissance de la piecei
+	// reconnaissance de la piece
 	while (buf[i])
 	{
 		if (buf[i] != '\n')
-		{
-			piece[j] = buf[i];
-			j++;
-		}
+			piece[j++] = buf[i];
 		i++;
 	}
 	piece[j] = '\0';
-	ft_putstr(piece);
-	ft_putchar('\n');
+	ft_putstr(piece); //debug
+	ft_putchar('\n'); //debug
 	ft_nettoyage(piece);
-	// if (la piece a deja ete enregistre, il faut simplement incrementer nb elem par 1)
-	// else on cree le nouveau maillon (nouveau type de piece)
-	//ft_lstdoublenew(piece, ft_strlen(piece), 1);
+	ft_putstr(piece); //debug
+	ft_putchar('\n'); //debug
+	ft_putchar('\n'); //debug
+	ft_testexist(list_piece, piece);
+	ft_putstr("affichage list : "); //debug
+	if (list_piece)
+		ft_putstr((char *)(*list_piece)->content); //debug
 }

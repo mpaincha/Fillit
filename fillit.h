@@ -6,7 +6,7 @@
 /*   By: mpaincha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/07 14:31:47 by mpaincha          #+#    #+#             */
-/*   Updated: 2015/12/08 14:06:06 by mpaincha         ###   ########.fr       */
+/*   Updated: 2015/12/09 15:03:25 by mpaincha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,20 +18,20 @@
 # include <sys/stat.h>
 # include <fcntl.h>
 
-typedef	struct			s_doublelist
+typedef	struct			s_dbllist
 {
 	void				*content;
 	size_t				content_size;
 	size_t				nb_elem;
-	struct s_doublelist	*prev;
-	struct s_doublelist	*next;
-}						t_doublelist;
+	struct s_dbllist	*prev;
+	struct s_dbllist	*next;
+}						t_dbllist;
 
 int						ft_validite_piece(char *buf);
 int						ft_validite_char(char *buf);
-int						ft_validite_fichier(char *fichier);
-void					ft_lstdoubleadd(t_doublelist **alst, t_doublelist *new);
-t_doublelist			*ft_lstdoublenew(void const *content, size_t content_size, size_t nb_elem);
-void					ft_enregistrement(char *buf);
+int						ft_validite_fichier(char *fichier, t_dbllist **list_piece);
+void					ft_lstdbladd(t_dbllist **alst, t_dbllist *new);
+t_dbllist				*ft_lstdblnew(void const *content, size_t content_size);
+void					ft_enregistrement(char *buf, t_dbllist **list_piece);
 
 #endif

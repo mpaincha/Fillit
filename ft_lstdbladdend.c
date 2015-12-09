@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdoubleaddend.c                               :+:      :+:    :+:   */
+/*   ft_lstdbladdend.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mpaincha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/12/08 13:33:06 by mpaincha          #+#    #+#             */
-/*   Updated: 2015/12/08 13:53:34 by mpaincha         ###   ########.fr       */
+/*   Created: 2015/12/09 09:44:35 by mpaincha          #+#    #+#             */
+/*   Updated: 2015/12/09 09:44:46 by mpaincha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-void	ft_lstdoubleaddend(t_doublelist **alst, t_doublelist *new)
+void	ft_lstdbladdend(t_dbllist **alst, t_dbllist *new)
 {
 	new->prev = *alst;
 	new->next = NULL;

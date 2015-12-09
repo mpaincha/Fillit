@@ -6,7 +6,7 @@
 /*   By: mpaincha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/08 10:04:11 by mpaincha          #+#    #+#             */
-/*   Updated: 2015/12/08 15:15:27 by mpaincha         ###   ########.fr       */
+/*   Updated: 2015/12/09 14:26:06 by mpaincha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int		ft_validite_char(char *buf)
 	return (1);
 }
 
-int		ft_validite_fichier(char *fichier)
+int		ft_validite_fichier(char *fichier, t_dbllist **list_piece)
 {
 	char	buf[22];
 	int		fd;
@@ -78,7 +78,7 @@ int		ft_validite_fichier(char *fichier)
 			return (-1);
 		}
 		else
-			ft_enregistrement(buf);
+			ft_enregistrement(buf, list_piece);
 		nb_pieces++;
 	}
 	if (nb_pieces > 26 || nb_pieces == 0)
