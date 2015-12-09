@@ -6,7 +6,7 @@
 /*   By: mpaincha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/08 10:04:11 by mpaincha          #+#    #+#             */
-/*   Updated: 2015/12/09 14:26:06 by mpaincha         ###   ########.fr       */
+/*   Updated: 2015/12/09 16:33:40 by mpaincha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int		ft_validite_piece(char *buf)
 	return (1);
 }
 
-int		ft_validite_char(char *buf)
+int		ft_validite_char(char *buf, int	*fin)
 {
 	int		i;
 	int		hashtag;
@@ -40,6 +40,8 @@ int		ft_validite_char(char *buf)
 			return (-1);
 		i = i + 5;
 	}
+	if (buf[20] == '\0')
+		*fin = *fin + 1;
 	if (buf[20] != '\n' && buf[20] != '\0')
 		return (-1);
 	i = 0;
@@ -62,17 +64,22 @@ int		ft_validite_fichier(char *fichier, t_dbllist **list_piece)
 	int		fd;
 	int		ret;
 	int		nb_pieces;
+	int		fin;
 
 	nb_pieces = 0;
+	fin = 0;
 	fd = open(fichier, O_RDONLY);
 	if (fd == -1)
 		return (-1);
 	while ((ret = read(fd, buf, 21)))
 	{
+		ft_putchar('\n');
+		ft_putnbr(ret);//debug
+		ft_putchar('\n');
 		buf[ret] = '\0';
 		ft_putstr(buf); //debug
 		ft_putchar('\n'); //debug
-		if (ft_validite_char(buf) == -1)
+		if (ft_validite_char(buf, &fin) == -1)
 		{
 			//free malloc enregistrement pieces
 			return (-1);
@@ -81,6 +88,10 @@ int		ft_validite_fichier(char *fichier, t_dbllist **list_piece)
 			ft_enregistrement(buf, list_piece);
 		nb_pieces++;
 	}
+	if (close(fd) == -1)
+		return (-1);
+	if (fin != 1)
+		return (-1);
 	if (nb_pieces > 26 || nb_pieces == 0)
 	{
 		//free malloc enregistrement pieces
