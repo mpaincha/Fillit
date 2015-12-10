@@ -6,7 +6,7 @@
 /*   By: mpaincha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/10 11:03:32 by mpaincha          #+#    #+#             */
-/*   Updated: 2015/12/10 17:24:32 by kvignau          ###   ########.fr       */
+/*   Updated: 2015/12/10 18:48:56 by kvignau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int		ft_validite_piece(char *buf)
 	return (1);
 }
 
-int		ft_validite_char(char *buf, int	*fin)
+int		ft_validite_char(char *buf, int	*fin, char lettre)
 {
 	int		i;
 	int		hashtag;
@@ -50,7 +50,10 @@ int		ft_validite_char(char *buf, int	*fin)
 		if (buf[i] != '.' && buf[i] != '#' && buf[i] != '\n')
 			return (-1);
 		if (buf[i] == '#')
+		{
+			buf[i] = lettre;
 			hashtag++;
+		}
 		i++;
 	}
 	if (hashtag != 4 || ft_validite_piece(buf) == -1)
@@ -58,31 +61,32 @@ int		ft_validite_char(char *buf, int	*fin)
 	return (1);
 }
 
-int		ft_validite_fichier(char *fichier, t_dbllist **list_piece)
+int		ft_validite_fichier(char *fichier, t_dbllist **list_piece, int *fin)
 {
 	char	buf[22];
 	int		fd;
 	int		ret;
 	int		nb_pieces;
-	int		fin;
+	char	lettre;
 
 	nb_pieces = 0;
-	fin = 0;
+	lettre = 'A';
 	fd = open(fichier, O_RDONLY);
 	if (fd == -1)
 		return (-1);
 	while ((ret = read(fd, buf, 21)))
 	{
 		buf[ret] = '\0';
-		if (ft_validite_char(buf, &fin) == -1)
+		if (ft_validite_char(buf, fin, lettre) == -1)
 			return (-1);
 		else
 			ft_enregistrement(buf, list_piece);
 		nb_pieces++;
+		lettre++;
 	}
 	if (close(fd) == -1)
 		return (-2);
-	if (fin != 1)
+	if (*fin != 1)
 	{
 		return (-2);
 	}

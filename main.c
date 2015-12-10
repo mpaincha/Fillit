@@ -6,7 +6,7 @@
 /*   By: mpaincha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/07 15:27:52 by mpaincha          #+#    #+#             */
-/*   Updated: 2015/12/10 17:33:28 by kvignau          ###   ########.fr       */
+/*   Updated: 2015/12/10 18:46:33 by kvignau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,13 @@ int		main(int ac, char **av)
 {
 	t_dbllist	*list_piece;
 	int			ret;
+	int			fin;
 
+	fin = 0;
 	if (ac == 2)
 	{
 		list_piece = ft_lstdblnew();
-		ret = ft_validite_fichier(av[1], &list_piece);
+		ret = ft_validite_fichier(av[1], &list_piece, &fin);
 		if (ret < 0)
 		{
 			ft_putstr("error\n");
