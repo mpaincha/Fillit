@@ -6,7 +6,7 @@
 /*   By: mpaincha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/07 14:31:47 by mpaincha          #+#    #+#             */
-/*   Updated: 2015/12/10 15:30:42 by mpaincha         ###   ########.fr       */
+/*   Updated: 2015/12/10 17:21:57 by kvignau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,6 @@ t_dbllist				*ft_lstdblnew(void);
 void					ft_enregistrement(char *buf, t_dbllist **list_piece);
 void					ft_putlsthead(t_dbllist *list);
 void					ft_putlsttail(t_dbllist *list);
+void					ft_dbldel(t_dbllist **list);
 
 #endif
