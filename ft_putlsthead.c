@@ -6,7 +6,7 @@
 /*   By: mpaincha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/10 15:27:51 by mpaincha          #+#    #+#             */
-/*   Updated: 2015/12/10 15:29:16 by mpaincha         ###   ########.fr       */
+/*   Updated: 2015/12/10 18:52:59 by kvignau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,4 @@ void	ft_putlsthead(t_dbllist *list)
 		ft_putstr(tmp->content);
 		tmp = tmp->next;
 	}
-
 }

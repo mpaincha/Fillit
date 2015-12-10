@@ -6,7 +6,7 @@
 /*   By: mpaincha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/10 11:03:20 by mpaincha          #+#    #+#             */
-/*   Updated: 2015/12/10 16:44:46 by kvignau          ###   ########.fr       */
+/*   Updated: 2015/12/10 18:54:17 by kvignau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ void	ft_nettoyage(char *piece)
 {
 	int		i;
 
-	while (piece[0] == '.' && piece[4] == '.' && piece[8] == '.' && piece[12] == '.')
+	while (piece[0] == '.' && piece[4] == '.' && piece[8] == '.' &&
+			piece[12] == '.')
 	{
 		ft_memmove(piece, piece + 1, 3);
 		piece[3] = '.';
@@ -29,7 +30,8 @@ void	ft_nettoyage(char *piece)
 	}
 	piece[16] = '\0';
 	i = 12;
-	while (piece[0] == '.' && piece[1] == '.' && piece[2] == '.' && piece[3] == '.')
+	while (piece[0] == '.' && piece[1] == '.' && piece[2] == '.' &&
+			piece[3] == '.')
 	{
 		ft_memmove(piece, piece + 4, 12);
 		while (i <= 15)
@@ -37,7 +39,7 @@ void	ft_nettoyage(char *piece)
 	}
 }
 
-void	ft_enregistrement(char	*buf, t_dbllist **list_piece)
+void	ft_enregistrement(char *buf, t_dbllist **list_piece)
 {
 	char		piece[16];
 	int			i;

@@ -6,7 +6,7 @@
 /*   By: mpaincha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/07 14:31:47 by mpaincha          #+#    #+#             */
-/*   Updated: 2015/12/10 18:49:48 by kvignau          ###   ########.fr       */
+/*   Updated: 2015/12/10 19:02:13 by kvignau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef	struct			s_dbllist
 }						t_dbllist;
 
 int						ft_validite_piece(char *buf);
+int						ft_replace(char *buf, int *hashtag, char lettre);
 int						ft_validite_char(char *buf, int *fin, char lettre);
 int						ft_validite_fichier(char *fichier, t_dbllist **list_piece, int *fin);
 void					ft_lstdbladd(t_dbllist **list, void *content, size_t cont_size);

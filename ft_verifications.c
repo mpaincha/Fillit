@@ -6,7 +6,7 @@
 /*   By: mpaincha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/10 11:03:32 by mpaincha          #+#    #+#             */
-/*   Updated: 2015/12/10 18:48:56 by kvignau          ###   ########.fr       */
+/*   Updated: 2015/12/10 19:02:04 by kvignau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int		ft_validite_piece(char *buf)
 	return (1);
 }
 
-int		ft_validite_char(char *buf, int	*fin, char lettre)
+int		ft_validite_char(char *buf, int *fin, char lettre)
 {
 	int		i;
 	int		hashtag;
@@ -44,6 +44,17 @@ int		ft_validite_char(char *buf, int	*fin, char lettre)
 		*fin = *fin + 1;
 	if (buf[20] != '\n' && buf[20] != '\0')
 		return (-1);
+	if (ft_replace(buf, &hashtag, lettre) == -1)
+		return (-1);
+	if (hashtag != 4 || ft_validite_piece(buf) == -1)
+		return (-1);
+	return (1);
+}
+
+int		ft_replace(char *buf, int *hashtag, char lettre)
+{
+	int		i;
+
 	i = 0;
 	while (buf[i] != '\0')
 	{
@@ -52,12 +63,10 @@ int		ft_validite_char(char *buf, int	*fin, char lettre)
 		if (buf[i] == '#')
 		{
 			buf[i] = lettre;
-			hashtag++;
+			*hashtag = *hashtag + 1;
 		}
 		i++;
 	}
-	if (hashtag != 4 || ft_validite_piece(buf) == -1)
-		return (-1);
 	return (1);
 }
 
