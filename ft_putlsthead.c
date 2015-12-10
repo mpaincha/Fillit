@@ -1,29 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdblnew.c                                     :+:      :+:    :+:   */
+/*   ft_putlsthead.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mpaincha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/12/09 09:45:18 by mpaincha          #+#    #+#             */
-/*   Updated: 2015/12/10 15:25:22 by mpaincha         ###   ########.fr       */
+/*   Created: 2015/12/10 15:27:51 by mpaincha          #+#    #+#             */
+/*   Updated: 2015/12/10 15:29:16 by mpaincha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-t_dbllist	*ft_lstdblnew(void)
+void	ft_putlsthead(t_dbllist *list)
 {
-	t_dbllist	*list;
+	t_elem	*tmp;
 
-	list = (t_dbllist *)malloc(sizeof(t_dbllist));
-	if (list == NULL)
-		return (NULL);
-	else
+	tmp = list->head;
+	while (tmp != NULL)
 	{
-		list->length = 0;
-		list->tail = NULL;
-		list->head = NULL;
+		ft_putstr(tmp->content);
+		tmp = tmp->next;
 	}
-	return (list);
+
 }

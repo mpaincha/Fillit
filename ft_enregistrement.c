@@ -1,24 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   enregistrement.c                                   :+:      :+:    :+:   */
+/*   ft_enregistrement.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mpaincha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/12/08 10:55:28 by mpaincha          #+#    #+#             */
-/*   Updated: 2015/12/09 16:39:29 by mpaincha         ###   ########.fr       */
+/*   Created: 2015/12/10 11:03:20 by mpaincha          #+#    #+#             */
+/*   Updated: 2015/12/10 15:40:19 by mpaincha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
-
-void		ft_testexist(t_dbllist **list_piece, char *piece)
-{
-	t_dbllist	*new_piece;
-	
-	new_piece = ft_lstdblnew(piece, ft_strlen(piece));
-	ft_lstdbladd(list_piece, new_piece);
-}
 
 void	ft_nettoyage(char *piece)
 {
@@ -48,16 +40,12 @@ void	ft_nettoyage(char *piece)
 void	ft_enregistrement(char	*buf, t_dbllist **list_piece)
 {
 	char		piece[16];
-	int			nbpoint;
 	int			i;
 	int			j;
 
 	i = 0;
 	j = 0;
-	nbpoint = 0;
 	ft_strclr(piece);
-	//ft_memcpy(piece, buf, 20);
-	// reconnaissance de la piece
 	while (buf[i])
 	{
 		if (buf[i] != '\n')
@@ -65,14 +53,8 @@ void	ft_enregistrement(char	*buf, t_dbllist **list_piece)
 		i++;
 	}
 	piece[j] = '\0';
-	ft_putstr(piece); //debug
-	ft_putchar('\n'); //debug
 	ft_nettoyage(piece);
 	ft_putstr(piece); //debug
 	ft_putchar('\n'); //debug
-	ft_putchar('\n'); //debug
-	ft_testexist(list_piece, piece);
-	ft_putstr("affichage list : "); //debug
-	if (list_piece)
-		ft_putstr((char *)(*list_piece)->content); //debug
+	ft_lstdbladd(list_piece, piece, ft_strlen(piece) + 1);
 }

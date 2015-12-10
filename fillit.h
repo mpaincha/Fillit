@@ -6,7 +6,7 @@
 /*   By: mpaincha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/07 14:31:47 by mpaincha          #+#    #+#             */
-/*   Updated: 2015/12/09 16:27:06 by mpaincha         ###   ########.fr       */
+/*   Updated: 2015/12/10 15:30:42 by mpaincha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,20 +18,26 @@
 # include <sys/stat.h>
 # include <fcntl.h>
 
-typedef	struct			s_dbllist
+typedef	struct			s_elem
 {
 	void				*content;
-	size_t				content_size;
-	size_t				nb_elem;
-	struct s_dbllist	*prev;
-	struct s_dbllist	*next;
+	struct s_elem		*prev;
+	struct s_elem		*next;
+}						t_elem;
+typedef	struct			s_dbllist
+{
+	size_t				length;
+	struct s_elem		*tail;
+	struct s_elem		*head;
 }						t_dbllist;
 
 int						ft_validite_piece(char *buf);
 int						ft_validite_char(char *buf, int	*fin);
 int						ft_validite_fichier(char *fichier, t_dbllist **list_piece);
-void					ft_lstdbladd(t_dbllist **alst, t_dbllist *new);
-t_dbllist				*ft_lstdblnew(void const *content, size_t content_size);
+void					ft_lstdbladd(t_dbllist **list, void *content, size_t cont_size);
+t_dbllist				*ft_lstdblnew(void);
 void					ft_enregistrement(char *buf, t_dbllist **list_piece);
+void					ft_putlsthead(t_dbllist *list);
+void					ft_putlsttail(t_dbllist *list);
 
 #endif
