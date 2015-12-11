@@ -6,7 +6,7 @@
 /*   By: mpaincha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/07 14:31:47 by mpaincha          #+#    #+#             */
-/*   Updated: 2015/12/11 11:54:01 by mpaincha         ###   ########.fr       */
+/*   Updated: 2015/12/11 16:24:04 by mpaincha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ void					ft_enregistrement(char *buf, t_dbllist **list_piece);
 void					ft_putlsthead(t_dbllist *list);
 void					ft_putlsttail(t_dbllist *list);
 void					ft_lstdbldel(t_dbllist **list);
-int						ft_tailledbt(int nb_pieces);
+int						ft_sqrtfillit(int n);
+char					*ft_carrevide(int c);
+char					*ft_resolution(char *res, t_dbllist *listpiece, int nb_pieces);
 
 #endif
