@@ -1,28 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_dbldel.c                                        :+:      :+:    :+:   */
+/*   ft_resolution.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kvignau <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: mpaincha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/12/10 17:14:21 by kvignau           #+#    #+#             */
-/*   Updated: 2015/12/10 17:35:11 by kvignau          ###   ########.fr       */
+/*   Created: 2015/12/11 11:37:37 by mpaincha          #+#    #+#             */
+/*   Updated: 2015/12/11 11:53:40 by mpaincha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
+#include <math.h>
 
-void	ft_dbldel(t_dbllist **list)
+int		ft_tailledbt(int nb_pieces)
 {
-	t_elem	*tmp;
+	float	c;
+	int		cote;
 
-	tmp = NULL;
-	while ((*list)->head != NULL)
-	{
-		tmp = (*list)->head->next;
-		free((*list)->head);
-		(*list)->head = tmp;
-	}
-	(*list)->tail = NULL;
-	(*list)->head = NULL;
+	c = sqrt(4 * nb_pieces);
+	cote = 0;
+	if (c % (int)c != 0)
+		cote = (int)c + 1;
+	else
+		cote = (int)c;
+	return (cote);
 }
+
+
