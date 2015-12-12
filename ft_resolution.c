@@ -6,11 +6,45 @@
 /*   By: mpaincha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/11 11:37:37 by mpaincha          #+#    #+#             */
-/*   Updated: 2015/12/11 18:04:51 by mpaincha         ###   ########.fr       */
+/*   Updated: 2015/12/12 17:32:44 by mpaincha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
+
+void	ft_putpiece(char *carre, char *piece, int cote, int pos)
+{
+	int		i;
+		
+	i = 0;
+	while (piece[i] && carre[pos])
+	{
+		if (piece[i] != '.')
+		{
+			if (carre[pos] == '.')
+			{
+				carre[pos] = piece[i];
+				if ((i + 1 == 4) || (i + 1 == 8) || (i + 1 == 12))
+					pos = pos + (cote - 3);	
+				else
+					pos++;
+			}
+			else
+				return ;
+		
+		}
+		else
+		{
+			if ((i + 1 == 4) || (i + 1 == 8) || (i + 1 == 12))
+				pos = pos + (cote - 3);
+			else
+			pos++;
+		}
+		i++;	
+	}
+}
+//verif si carre parfait strictement plus grand que 4 de cote :i
+//WARNING FAIRE LE CAS OU LE CARRE PARFAIT EST PLUS PETIT AUE $ DE COTES 
 
 //verif si carre parfait strictement plus grand que 4 de cote :
 int		ft_verifdispo(char *carre, char	*piece, int cote, int pos)
@@ -20,64 +54,85 @@ int		ft_verifdispo(char *carre, char	*piece, int cote, int pos)
 
 	i = 0;
 	hashtag = 0;
-	while (piece[i] && carre[pos])
+	while (i < 16 && carre[pos])
 	{
-		ft_putstr("deplacement piece i et carre pos \n"); //debug
-		ft_putstr("i : "); //debug
-		ft_putnbr(i); //debug
-		ft_putstr("\n pos : "); //debug
+		ft_putstr("\npos :"); //debug
 		ft_putnbr(pos); //debug
-		ft_putstr(" \n"); //debug
+		ft_putstr("\ni :"); //debug
+		ft_putnbr(i); //debug
 		if (piece[i] != '.')
 		{
+			ft_putchar(carre[pos]);
 			if (carre[pos] == '.')
 			{
-				if (i == 3 || i == 7 || i == 11 || i == 18)
-					pos = pos + (cote - 4);				
+				ft_putstr("rentree");
+				if ((pos + 1 == 4) || (pos + 1 == 8) || (pos + 1 == 12))
+					pos = pos + (cote - 3);	
 				else
 					pos++;
-				i++;
 				hashtag++;
+				ft_putnbr(hashtag);
 			}
 			else
 				return (0);
 		}
+		else if (hashtag != 0)
+		{
+			if (pos + 1 == 4 || pos + 1 == 8 || pos + 1 == 12)
+				pos = pos + (cote - 3);	
+			else
+				pos++;
+		}
+		else 
+			pos = pos;
 		i++;
 	}
 	return (hashtag == 4 ? 1 : 0);
 }
 
-int		ft_placement(t_dbllist *list_piece, char *carre, int cote)
+int		ft_placement(t_dbllist *list_piece, char *carre, int cote, int nb_pieces, int *cpt_pieces)
 {
 	
-	int		pos;
+	int			pos;
+	t_dbllist	*ptr;
 
 	pos = 0;
-	while (carre[pos])
+	while (carre[pos] != '\0' && list_piece->head->content)
 	{
-		ft_putstr("deplacement carre pos \n"); //debug
+		ft_putstr("\n carre a remplir : \n"); //debug
+		ft_affres(carre, cote); //debug
 		if (carre[pos] != '.')
-		{
-			ft_putstr("carre pos != ."); //debug
 			pos++;
-		}
 		else
 		{
-			ft_putstr("carre pos == . \n"); //debug
-			ft_putstr(list_piece->head->content);
+			ft_putstr("\n piece a placer :"); //debug
+			ft_putstr(list_piece->head->content); //debug
 			if (ft_verifdispo(carre, list_piece->head->content, cote, pos))
 			{
-				ft_putstr("ici \n");
-				ft_putstr("dispo");
-			//	ft_putpiece(list_piece->head, cote);
-			//	if (ft_placement(list_piece->head->next))
+				ft_putstr("dispo"); //debug
+				ft_putpiece(carre, list_piece->head->content, cote, pos);
+				ft_putstr("\nnew carre :\n"); //debug
+				ft_putstr(carre); //debug
+				ft_putstr("\ncpt piece :"); //debug
+				ft_putnbr(*cpt_pieces); //debug
+				ft_putstr("\n"); //debug
+				list_piece->head = list_piece->head->next;
+				*cpt_pieces = *cpt_pieces + 1;
+				if (*cpt_pieces == nb_pieces)
+				{
+					ft_putstr("OUEP"); //debug
 					return (1);
+				}
+				if (ft_placement(list_piece, carre, cote, nb_pieces, cpt_pieces))
+				{
+					ft_putstr("\nDONE\n"); //debug
+					return (1);
+				}
 			}
-			else
-				pos++;
+			pos++;
 		}
 	}
-	carre[pos] = '.';
+	//carre[pos] = '.';
 	return (0);
 }
 
@@ -98,20 +153,63 @@ char	*ft_carrevide(int c)
 	return (carre);
 }
 
+void	ft_affres(char *res, int cote)
+{
+	int		i;
+	int		y;
+
+	i = 0;
+	y = 1;
+	while (res[i])
+	{
+		if (y == cote)
+		{
+			ft_putchar(res[i++]);
+			ft_putchar('\n');
+			y = 1;
+		}
+		else
+		{
+			ft_putchar(res[i++]);
+			y++;
+		}
+	}
+}
+
 char	*ft_resolution(char *res, t_dbllist	*list_piece, int nb_pieces)
 {
-	int		cote;
+	int			cote;
+	t_dbllist	*listdup;
+	int			cpt_pieces;
 
+	cpt_pieces = 0;
 	cote = ft_sqrtfillit(4 * nb_pieces);
-	ft_putstr("carre vide : \n"); //debug
-	ft_putstr(ft_carrevide(cote)); //debug
+	listdup = ft_duplst(list_piece);
+	ft_putstr("cote : \n"); //debug
+	ft_putnbr(cote); //debug
 	ft_putstr(" \n"); //debug
 	ft_putstr("list recue : \n"); //debug
 	ft_putlsthead(list_piece); //debug
+	ft_putstr("\nlist dup : \n"); //debug
+	ft_putlsthead(listdup); //debug
 	ft_putstr("\n"); //debug
-//	ft_placement(list_piece, ft_carrevide(cote), cote);
-	ft_placement(list_piece, "................", cote);
+	res = ft_carrevide(cote);
+	if (ft_placement(list_piece, res, cote, nb_pieces, &cpt_pieces) == 0)
+	{
+		ft_putstr("impossible");
+		ft_putstr("\nlist dup : \n"); //debug
+		ft_putlsthead(listdup);
+		cpt_pieces = 0;
+		cote++;
+		res = ft_carrevide(cote);
+		ft_placement(listdup, res, cote + 1, nb_pieces, &cpt_pieces);
+	}
+	ft_putstr("\nres : \n"); //debug
+	ft_putstr(res);
+	ft_putstr("\nres : \n"); //debug
+	ft_affres(res, cote);
 	return (res);
+	//	ft_placement(list_piece, car, cote);
 }
 
 

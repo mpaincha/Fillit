@@ -6,7 +6,7 @@
 /*   By: mpaincha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/07 14:31:47 by mpaincha          #+#    #+#             */
-/*   Updated: 2015/12/11 18:04:54 by mpaincha         ###   ########.fr       */
+/*   Updated: 2015/12/12 17:32:48 by mpaincha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,5 +44,11 @@ void					ft_lstdbldel(t_dbllist **list);
 int						ft_sqrtfillit(int n);
 char					*ft_carrevide(int c);
 char					*ft_resolution(char *res, t_dbllist *listpiece, int nb_pieces);
+void					ft_affres(char *res, int cote);
+char					*ft_carrevide(int c);
+int						ft_placement(t_dbllist *list_piece, char *carre, int cote, int nb_pieces, int *cpt_pieces);
+void					ft_putpiece(char *carre, char *piece, int cote, int pos);
+int						ft_verifdispo(char *carre, char *piece, int cote, int pos);
+t_dbllist				*ft_duplst(t_dbllist *list);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: mpaincha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/07 15:27:52 by mpaincha          #+#    #+#             */
-/*   Updated: 2015/12/11 18:04:56 by mpaincha         ###   ########.fr       */
+/*   Updated: 2015/12/12 17:32:47 by mpaincha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,10 @@ int		main(int ac, char **av)
 		else
 		{
 			ft_putstr("nikel \n"); //debug
-			ft_resolution(res, list_piece, nb_pieces);
+			ft_putstr("listdup : \n"); //debug
+			ft_putlsthead(ft_duplst(list_piece));
+			ft_putstr("fin lstdup \n"); //debug
+			res = ft_resolution(res, list_piece, nb_pieces);
 		}
 	}
 	return (0);
