@@ -6,12 +6,12 @@
 /*   By: mpaincha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/11 11:37:37 by mpaincha          #+#    #+#             */
-/*   Updated: 2015/12/12 17:51:12 by mpaincha         ###   ########.fr       */
+/*   Updated: 2015/12/12 17:54:04 by mpaincha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
-
+//REGARDER QUAND LA PIECE NES PAS TESTE A PARTIR DE LA POSITION POS 0)
 void	ft_putpiece(char *carre, char *piece, int cote, int pos)
 {
 	int		i;
