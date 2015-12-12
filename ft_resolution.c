@@ -6,7 +6,7 @@
 /*   By: mpaincha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/11 11:37:37 by mpaincha          #+#    #+#             */
-/*   Updated: 2015/12/12 17:32:44 by mpaincha         ###   ########.fr       */
+/*   Updated: 2015/12/12 17:51:12 by mpaincha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,10 @@
 void	ft_putpiece(char *carre, char *piece, int cote, int pos)
 {
 	int		i;
-		
+	int		pose;
+
 	i = 0;
+	pose = 0;
 	while (piece[i] && carre[pos])
 	{
 		if (piece[i] != '.')
@@ -24,22 +26,25 @@ void	ft_putpiece(char *carre, char *piece, int cote, int pos)
 			if (carre[pos] == '.')
 			{
 				carre[pos] = piece[i];
-				if ((i + 1 == 4) || (i + 1 == 8) || (i + 1 == 12))
+				if ((pos + 1 == 4) || (pos + 1 == 9) || (pos + 1 == 14))
 					pos = pos + (cote - 3);	
 				else
 					pos++;
+				pose++;
 			}
 			else
 				return ;
 		
 		}
-		else
+		else if (pose != 0)
 		{
-			if ((i + 1 == 4) || (i + 1 == 8) || (i + 1 == 12))
+			if ((pos + 1 == 4) || (pos + 1 == 9) || (pos + 1 == 14))
 				pos = pos + (cote - 3);
 			else
 			pos++;
 		}
+		else
+			pos = pos;
 		i++;	
 	}
 }
@@ -66,7 +71,7 @@ int		ft_verifdispo(char *carre, char	*piece, int cote, int pos)
 			if (carre[pos] == '.')
 			{
 				ft_putstr("rentree");
-				if ((pos + 1 == 4) || (pos + 1 == 8) || (pos + 1 == 12))
+				if ((pos + 1 == 4) || (pos + 1 == 9) || (pos + 1 == 14))
 					pos = pos + (cote - 3);	
 				else
 					pos++;
@@ -78,7 +83,7 @@ int		ft_verifdispo(char *carre, char	*piece, int cote, int pos)
 		}
 		else if (hashtag != 0)
 		{
-			if (pos + 1 == 4 || pos + 1 == 8 || pos + 1 == 12)
+			if (pos + 1 == 4 || pos + 1 == 9 || pos + 1 == 14)
 				pos = pos + (cote - 3);	
 			else
 				pos++;
