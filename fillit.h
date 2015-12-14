@@ -6,7 +6,7 @@
 /*   By: mpaincha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/07 14:31:47 by mpaincha          #+#    #+#             */
-/*   Updated: 2015/12/12 17:51:09 by mpaincha         ###   ########.fr       */
+/*   Updated: 2015/12/14 11:30:50 by mpaincha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,17 @@ typedef	struct			s_dbllist
 	struct s_elem		*tail;
 	struct s_elem		*head;
 }						t_dbllist;
+typedef struct			s_pos
+{
+	int					ini;
+	int					max1;
+	int					min1;
+	int					max2;
+	int					min2;
+	int					max3;
+	int					min3;
+	int					max4;
+}						t_pos;
 
 int						ft_validite_piece(char *buf);
 int						ft_replace(char *buf, int *hashtag, char lettre);
@@ -47,8 +58,10 @@ char					*ft_resolution(char *res, t_dbllist *listpiece, int nb_pieces);
 void					ft_affres(char *res, int cote);
 char					*ft_carrevide(int c);
 int						ft_placement(t_dbllist *list_piece, char *carre, int cote, int nb_pieces, int *cpt_pieces);
-void					ft_putpiece(char *carre, char *piece, int cote, int pos);
-int						ft_verifdispo(char *carre, char *piece, int cote, int pos);
+void					ft_putpiece(char *carre, char *piece, int cote, t_pos pos);
+int						ft_verifdispo(char *carre, char *piece, int cote, t_pos pos);
 t_dbllist				*ft_duplst(t_dbllist *list);
+int						ft_newpos(int j, t_pos pos);
+void					ft_structpos(t_pos pos, int cote);
 
 #endif
