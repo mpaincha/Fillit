@@ -6,7 +6,7 @@
 /*   By: mpaincha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/07 14:31:47 by mpaincha          #+#    #+#             */
-/*   Updated: 2015/12/14 13:38:30 by mpaincha         ###   ########.fr       */
+/*   Updated: 2015/12/14 17:04:44 by kvignau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,14 @@ typedef	struct			s_elem
 	struct s_elem		*prev;
 	struct s_elem		*next;
 }						t_elem;
+
 typedef	struct			s_dbllist
 {
 	size_t				length;
 	struct s_elem		*tail;
 	struct s_elem		*head;
 }						t_dbllist;
+
 typedef struct			s_pos
 {
 	int					ini;

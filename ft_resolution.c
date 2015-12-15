@@ -6,7 +6,7 @@
 /*   By: mpaincha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/11 11:37:37 by mpaincha          #+#    #+#             */
-/*   Updated: 2015/12/14 13:38:24 by mpaincha         ###   ########.fr       */
+/*   Updated: 2015/12/15 15:48:25 by kvignau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,18 +41,15 @@ void	ft_putpiece(char *carre, char *piece, int cote, t_pos *pos)
 			}
 			else
 				return ;
-		
 		}
 		else if (pose != 0)
 			j = ft_newpos(j, pos);
-		else
-			j = j;
-		i++;	
+		i++;
 	}
 	ft_putstr("\nNEW CARRE:");
 	ft_putstr(carre);
 }
-				
+
 int		ft_newpos(int j, t_pos *pos)
 {
 	int		jnew;
@@ -66,23 +63,21 @@ int		ft_newpos(int j, t_pos *pos)
 		jnew = pos->min3;
 	else
 		jnew++;
+	ft_putstr("\nNEWPOS:");
+	ft_putnbr(jnew);
 	return (jnew);
 }
 
 void	ft_structpos(t_pos *pos, int cote)
 {
-	if (pos->maxl1 <= pos->ini + 3)
-		pos->max1 = pos->ini + 3;
-	else
-		pos->max1 /////////
-
+	pos->max1 = pos->ini + 3;
 	pos->min1 = pos->ini + cote;
 	pos->max2 = pos->min1 + 3;
 	pos->min2 = pos->min1 + cote;
 	pos->max3 = pos->min2 + 3;
 	pos->min3 = pos->min2 + cote;
 	pos->max4 = pos->min3 + 3;
-/*
+
 	ft_putstr("\npos ini:");
 	ft_putnbr(pos->ini);
 	ft_putstr("\npos max1:");
@@ -99,9 +94,26 @@ void	ft_structpos(t_pos *pos, int cote)
 	ft_putnbr(pos->min3);
 	ft_putstr("\npos max4:");
 	ft_putnbr(pos->max4);
-*/
+
 }
 
+
+int		ft_testmax(int cote, t_pos *pos, char *piece)
+{
+	int	i;
+
+	i = 2;
+	while (pos->ini > cote)
+	{
+		cote *= i;
+		i++;
+	}
+	ft_putstr("\ntestmax, cote : \n");
+	ft_putnbr(cote);
+	if (pos->max1 > cote && piece[cote - pos->ini] != '.')
+		return (0);
+	return (1);
+}
 //verif si carre parfait strictement plus grand que 4 de cote :i
 //WARNING FAIRE LE CAS OU LE CARRE PARFAIT EST PLUS PETIT que 4 DE COTES 
 
@@ -123,6 +135,11 @@ int		ft_verifdispo(char *carre, char	*piece, int cote, t_pos pos)
 		ft_putnbr(i); //debug
 		if (piece[i] != '.')
 		{
+			if (!ft_testmax(cote, &pos, piece))
+			{
+				ft_putstr("CARRE NON OK COUCOU JE SUIS LA HE HO HE HO");
+				return (0);
+			}
 			ft_putchar(carre[j]); //debug
 			if (carre[j] == '.')
 			{
@@ -148,13 +165,13 @@ int		ft_verifdispo(char *carre, char	*piece, int cote, t_pos pos)
 
 int		ft_placement(t_dbllist *list_piece, char *carre, int cote, int nb_pieces, int *cpt_pieces)
 {
-	
+
 	t_pos		pos;
 	t_dbllist	*ptr;
 
 	pos.ini = 0;
-	ft_putnbr(pos.ini);	
-	
+	ft_putnbr(pos.ini);
+
 	ft_structpos(&pos, cote);
 	while (carre[pos.ini] != '\0' && list_piece->head->content)
 	{
@@ -167,8 +184,8 @@ int		ft_placement(t_dbllist *list_piece, char *carre, int cote, int nb_pieces, i
 			ft_putstr("\n piece a placer :\n"); //debug
 			ft_affres(list_piece->head->content, 4); //debug
 			ft_putstr("\n pos ini :"); //debug
-			ft_putnbr(pos.ini);	
-			ft_structpos(&pos, cote); 
+			ft_putnbr(pos.ini);
+			ft_structpos(&pos, cote);
 			if (ft_verifdispo(carre, list_piece->head->content, cote, pos))
 			{
 				ft_putstr("\n Emplacement disponible"); //debug
@@ -264,7 +281,7 @@ char	*ft_resolution(char *res, t_dbllist	*list_piece, int nb_pieces)
 		cpt_pieces = 0;
 		cote++;
 		res = ft_carrevide(cote);
-		ft_placement(listdup, res, cote + 1, nb_pieces, &cpt_pieces);
+		ft_placement(listdup, res, cote, nb_pieces, &cpt_pieces);
 	}
 	ft_putstr("\nres : \n"); //debug
 	ft_putstr(res);
