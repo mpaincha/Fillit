@@ -6,7 +6,7 @@
 /*   By: mpaincha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/11 10:06:14 by mpaincha          #+#    #+#             */
-/*   Updated: 2015/12/11 10:30:31 by mpaincha         ###   ########.fr       */
+/*   Updated: 2015/12/16 11:46:39 by kvignau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ void	ft_lstdbldel(t_dbllist **list)
 	while ((*list)->head != NULL)
 	{
 		tmp = (*list)->head->next;
+		(*list)->head->height = 0;
+		(*list)->head->width = 0;
 		free((*list)->head->content);
 		(*list)->head->content = NULL;
 		free((*list)->head);

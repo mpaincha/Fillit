@@ -6,7 +6,7 @@
 /*   By: mpaincha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/07 14:31:47 by mpaincha          #+#    #+#             */
-/*   Updated: 2015/12/14 17:04:44 by kvignau          ###   ########.fr       */
+/*   Updated: 2015/12/16 11:31:50 by kvignau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 typedef	struct			s_elem
 {
 	void				*content;
+	size_t				height;
+	size_t				width;
 	struct s_elem		*prev;
 	struct s_elem		*next;
 }						t_elem;
