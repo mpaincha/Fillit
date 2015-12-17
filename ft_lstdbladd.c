@@ -6,13 +6,13 @@
 /*   By: mpaincha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/09 09:43:37 by mpaincha          #+#    #+#             */
-/*   Updated: 2015/12/16 11:40:21 by kvignau          ###   ########.fr       */
+/*   Updated: 2015/12/17 12:07:41 by kvignau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-static void	ft_sizecontent(char *content, size_t cont_size, t_elem **new_elem)
+static void	ft_sizecontent(char *content, size_t cont_size, t_elem *new_elem)
 {
 	size_t		i;
 	size_t		lg;
@@ -21,12 +21,14 @@ static void	ft_sizecontent(char *content, size_t cont_size, t_elem **new_elem)
 	i = 0;
 	lg = 0;
 	ok = 1;
+	new_elem->width = 0;
+	new_elem->height = 0;
 	while (i < 16)
 	{
 		if (i % 4 == 0 && i > 0)
 		{
-			if (lg > (*new_elem)->width)
-				(*new_elem)->width = lg;
+			if (lg > new_elem->width)
+				new_elem->width = lg;
 			lg = 0;
 			ok = 1;
 		}
@@ -34,11 +36,15 @@ static void	ft_sizecontent(char *content, size_t cont_size, t_elem **new_elem)
 			lg++;
 		if (content[i] != '.' && ok)
 		{
-			(*new_elem)->height++;
+			new_elem->height++;
 			ok = 0;
 		}
 		i++;
 	}
+	ft_putstr("\n\n\nAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\n");
+	ft_putnbr(new_elem->width);
+	ft_putstr("\nheight\n");
+	ft_putnbr(new_elem->height);
 }
 
 void		ft_lstdbladd(t_dbllist **list, void *content, size_t cont_size)
@@ -55,7 +61,7 @@ void		ft_lstdbladd(t_dbllist **list, void *content, size_t cont_size)
 		return ;
 	}
 	ft_memcpy(new_elem->content, content, cont_size);
-	ft_sizecontent((char *)content, cont_size, &new_elem);
+	ft_sizecontent((char *)content, cont_size, new_elem);
 	new_elem->next = NULL;
 	new_elem->prev = NULL;
 	if ((*list)->head == NULL)
