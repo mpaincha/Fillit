@@ -6,7 +6,7 @@
 /*   By: mpaincha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/07 14:31:47 by mpaincha          #+#    #+#             */
-/*   Updated: 2015/12/16 11:31:50 by kvignau          ###   ########.fr       */
+/*   Updated: 2015/12/17 14:36:20 by kvignau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,9 @@ char					*ft_carrevide(int c);
 char					*ft_resolution(char *res, t_dbllist *listpiece, int nb_pieces);
 void					ft_affres(char *res, int cote);
 char					*ft_carrevide(int c);
-int						ft_placement(t_dbllist *list_piece, char *carre, int cote, int nb_pieces, int *cpt_pieces);
+int						ft_placement(t_elem const *piece, char *carre, int cote, int nb_pieces, int *cpt_pieces);
 void					ft_putpiece(char *carre, char *piece, int cote, t_pos *pos);
-int						ft_verifdispo(char *carre, char *piece, int cote, t_pos pos);
+int						ft_verifdispo(char *carre, t_elem *piece, int cote, t_pos pos);
 t_dbllist				*ft_duplst(t_dbllist *list);
 int						ft_newpos(int j, t_pos *pos);
 void					ft_structpos(t_pos *pos, int cote);

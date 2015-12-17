@@ -6,7 +6,7 @@
 /*   By: mpaincha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/09 09:43:37 by mpaincha          #+#    #+#             */
-/*   Updated: 2015/12/17 12:07:41 by kvignau          ###   ########.fr       */
+/*   Updated: 2015/12/17 14:20:16 by kvignau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,6 @@ static void	ft_sizecontent(char *content, size_t cont_size, t_elem *new_elem)
 		}
 		i++;
 	}
-	ft_putstr("\n\n\nAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\n");
-	ft_putnbr(new_elem->width);
-	ft_putstr("\nheight\n");
-	ft_putnbr(new_elem->height);
 }
 
 void		ft_lstdbladd(t_dbllist **list, void *content, size_t cont_size)
