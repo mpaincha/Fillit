@@ -6,7 +6,7 @@
 /*   By: mpaincha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/11 11:37:37 by mpaincha          #+#    #+#             */
-/*   Updated: 2015/12/17 16:52:21 by kvignau          ###   ########.fr       */
+/*   Updated: 2015/12/18 12:03:59 by kvignau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -225,7 +225,21 @@ int		ft_verifdispo(char *carre, t_elem	*piece, int cote, t_pos pos)
 	return (hashtag == 4 ? 1 : 0);
 }
 
-int		ft_placement(t_elem const *piece, char *carre, int cote, int nb_pieces, int *cpt_pieces)
+char	*ft_erase(char lettre, char *carre)
+{
+	int	i;
+
+	i = 0;
+	while (carre[i] != '\0')
+	{
+		if(carre[i] == lettre)
+			carre[i] = '.';
+		i++;
+	}
+	return (carre);
+}
+
+int		ft_placement(t_elem const *piece, char *carre, int cote)
 {
 
 	t_pos		pos;
@@ -255,16 +269,13 @@ int		ft_placement(t_elem const *piece, char *carre, int cote, int nb_pieces, int
 				ft_putpiece(carre, tmp->content, cote, &pos);
 				ft_putstr("\nnew carre :\n"); //debug
 				ft_putstr(carre); //debug
-				ft_putstr("\ncpt piece :"); //debug
-				ft_putnbr(*cpt_pieces); //debug
 				ft_putstr("\n"); //debug
-				*cpt_pieces = *cpt_pieces + 1;
-				if (*cpt_pieces == nb_pieces)
+				if (tmp->next == NULL)
 				{
 					ft_putstr("OUEP"); //debug
 					return (1);
 				}
-				if (ft_placement(tmp->next, carre, cote, nb_pieces, cpt_pieces))
+				if (ft_placement(tmp->next, carre, cote))
 				{
 					ft_putstr("\nDONE\n"); //debug
 					return (1);
@@ -274,6 +285,10 @@ int		ft_placement(t_elem const *piece, char *carre, int cote, int nb_pieces, int
 		}
 	}
 	//carre[pos] = '.';
+	ft_putstr("\n\n\n\n\n-------------------------------");
+	ft_putstr("retour");
+	ft_putstr("-------------------------------\n\n\n\n");
+	carre = ft_erase(tmp->prev->lettre, carre);
 	return (0);
 }
 
@@ -320,27 +335,17 @@ void	ft_affres(char *res, int cote)
 char	*ft_resolution(char *res, t_dbllist	*list_piece, int nb_pieces)
 {
 	int			cote;
-	t_dbllist	*listdup;
-	int			cpt_pieces;
 
-	cpt_pieces = 0;
 	cote = ft_sqrtfillit(4 * nb_pieces);
-	listdup = ft_duplst(list_piece);
 	ft_putstr("cote : \n"); //debug
 	ft_putnbr(cote); //debug
 	ft_putstr(" \n"); //debug
 	ft_putstr("list recue : \n"); //debug
 	ft_putlsthead(list_piece); //debug
-	ft_putstr("\nlist dup : \n"); //debug
-	ft_putlsthead(listdup); //debug
-	ft_putstr("\n"); //debug
 	res = ft_carrevide(cote);
-	while (ft_placement(list_piece->head, res, cote, nb_pieces, &cpt_pieces) == 0)
+	while (ft_placement(list_piece->head, res, cote) == 0)
 	{
 		ft_putstr("impossible");
-		ft_putstr("\nlist dup : \n"); //debug
-		ft_putlsthead(listdup);
-		cpt_pieces = 0;
 		cote++;
 		if (res)
 			free(res);

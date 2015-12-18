@@ -6,7 +6,7 @@
 /*   By: mpaincha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/10 11:03:20 by mpaincha          #+#    #+#             */
-/*   Updated: 2015/12/12 13:58:53 by mpaincha         ###   ########.fr       */
+/*   Updated: 2015/12/18 11:41:17 by kvignau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	ft_nettoyage(char *piece)
 	}
 }
 
-void	ft_enregistrement(char *buf, t_dbllist **list_piece)
+void	ft_enregistrement(char *buf, t_dbllist **list_piece, char lettre)
 {
 	char		piece[16];
 	int			i;
@@ -58,5 +58,5 @@ void	ft_enregistrement(char *buf, t_dbllist **list_piece)
 	ft_nettoyage(piece);
 	ft_putstr(piece); //debug
 	ft_putchar('\n'); //debug
-	ft_lstdbladd(list_piece, piece, ft_strlen(piece) + 1);
+	ft_lstdbladd(list_piece, piece, ft_strlen(piece) + 1, lettre);
 }

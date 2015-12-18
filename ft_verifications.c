@@ -6,7 +6,7 @@
 /*   By: mpaincha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/10 11:03:32 by mpaincha          #+#    #+#             */
-/*   Updated: 2015/12/11 17:41:11 by kvignau          ###   ########.fr       */
+/*   Updated: 2015/12/18 11:37:57 by kvignau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ int		ft_validite_fichier(char *fichier, t_dbllist **list_piece, int ret, int *nb
 		if (ft_validite_char(buf, &fin, lettre) == -1)
 			return (-1);
 		else
-			ft_enregistrement(buf, list_piece);
+			ft_enregistrement(buf, list_piece, lettre);
 		*nb_pieces = *nb_pieces + 1;
 		lettre++;
 	}

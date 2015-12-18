@@ -6,7 +6,7 @@
 /*   By: mpaincha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/11 10:06:14 by mpaincha          #+#    #+#             */
-/*   Updated: 2015/12/16 11:46:39 by kvignau          ###   ########.fr       */
+/*   Updated: 2015/12/18 11:35:43 by kvignau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	ft_lstdbldel(t_dbllist **list)
 		tmp = (*list)->head->next;
 		(*list)->head->height = 0;
 		(*list)->head->width = 0;
+		(*list)->head->lettre = '\0';
 		free((*list)->head->content);
 		(*list)->head->content = NULL;
 		free((*list)->head);
