@@ -6,13 +6,13 @@
 /*   By: mpaincha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/09 09:43:37 by mpaincha          #+#    #+#             */
-/*   Updated: 2015/12/18 11:43:18 by kvignau          ###   ########.fr       */
+/*   Updated: 2015/12/18 13:55:01 by kvignau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-static void	ft_sizecontent(char *content, size_t cont_size, t_elem *new_elem)
+static void	ft_sizecontent(char *content, t_elem *new_elem)
 {
 	size_t		i;
 	size_t		lg;
@@ -57,7 +57,7 @@ void		ft_lstdbladd(t_dbllist **list, void *content, size_t cont_size, char lettr
 		return ;
 	}
 	ft_memcpy(new_elem->content, content, cont_size);
-	ft_sizecontent((char *)content, cont_size, new_elem);
+	ft_sizecontent((char *)content, new_elem);
 	new_elem->lettre = '\0';
 	new_elem->next = NULL;
 	new_elem->prev = NULL;

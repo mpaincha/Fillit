@@ -6,7 +6,7 @@
 /*   By: mpaincha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/07 15:27:52 by mpaincha          #+#    #+#             */
-/*   Updated: 2015/12/18 11:10:43 by kvignau          ###   ########.fr       */
+/*   Updated: 2015/12/18 13:48:56 by kvignau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int		main(int ac, char **av)
 
 	ret = 0;
 	nb_pieces = 0;
+	res = NULL;
 	if (ac == 2)
 	{
 		list_piece = ft_lstdblnew();

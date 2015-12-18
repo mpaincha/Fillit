@@ -6,13 +6,13 @@
 /*   By: mpaincha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/11 11:37:37 by mpaincha          #+#    #+#             */
-/*   Updated: 2015/12/18 12:03:59 by kvignau          ###   ########.fr       */
+/*   Updated: 2015/12/18 13:51:32 by kvignau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 //REGARDER QUAND LA PIECE NES PAS TESTE A PARTIR DE LA POSITION POS 0)
-void	ft_putpiece(char *carre, char *piece, int cote, t_pos *pos)
+void	ft_putpiece(char *carre, char *piece, t_pos *pos)
 {
 	int		i;
 	int		pose;
@@ -158,7 +158,6 @@ int		ft_verifdispo(char *carre, t_elem	*piece, int cote, t_pos pos)
 				poscote = cote * z;
 				z++;
 			}
-			
 			if ((pos.ini - 1) + piece->width > poscote - 1)
 			{
 				ft_putstr("\nCOUCOU JE SORS");
@@ -266,7 +265,7 @@ int		ft_placement(t_elem const *piece, char *carre, int cote)
 			if (ft_verifdispo(carre, tmp, cote, pos))
 			{
 				ft_putstr("\n Emplacement disponible"); //debug
-				ft_putpiece(carre, tmp->content, cote, &pos);
+				ft_putpiece(carre, tmp->content, &pos);
 				ft_putstr("\nnew carre :\n"); //debug
 				ft_putstr(carre); //debug
 				ft_putstr("\n"); //debug
