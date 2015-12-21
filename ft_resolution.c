@@ -6,7 +6,7 @@
 /*   By: mpaincha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/11 11:37:37 by mpaincha          #+#    #+#             */
-/*   Updated: 2015/12/18 13:51:32 by kvignau          ###   ########.fr       */
+/*   Updated: 2015/12/21 17:26:22 by kvignau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,7 @@ int		ft_verifdispo(char *carre, t_elem	*piece, int cote, t_pos pos)
 	int		hashtag;
 	int		j;
 	int		poscote;
+	int		a;
 	int		z;
 	char	*piece1;
 
@@ -131,7 +132,8 @@ int		ft_verifdispo(char *carre, t_elem	*piece, int cote, t_pos pos)
 	j = pos.ini;
 	i = 0;
 	hashtag = 0;
-	z = 2;
+	a = 0;
+	z = -1;
 	poscote = cote;
 	ft_putstr("\nwidth : ");
 	ft_putnbr(piece->width);
@@ -146,6 +148,7 @@ int		ft_verifdispo(char *carre, t_elem	*piece, int cote, t_pos pos)
 		ft_putnbr(i); //debug
 		if (piece1[i] != '.')
 		{
+			z++;
 			/*if (!ft_testmax(cote, &pos, piece->content))
 			{
 				ft_putstr("CARRE NON OK COUCOU JE SUIS LA HE HO HE HO");
@@ -174,33 +177,28 @@ int		ft_verifdispo(char *carre, t_elem	*piece, int cote, t_pos pos)
 			}
 			if (pos.ini + (6 * (piece->height) - 1) > (cote * cote) - 1)
 				return (0);*/
-			if (carre[j] == '.')
+			/*if (i >= 12)
+				a = a + cote - (i - 12);
+			else if (i >= 8)
+				a = a + cote - (i - 8);
+			else if (i >= 4)
+				a = a + cote - (i - 4);
+			else*/
+			if (i < 4)
+				a = j + z;
+			else
+				a = a + cote - z;
+			ft_putstr("\n\n\nVALEUR DE I : ");
+			ft_putnbr(i);
+			ft_putstr("\n\nVALEUR DE A : ");
+			ft_putnbr(a);
+			ft_putstr("\n\nVALEUR DE Z : ");
+			ft_putnbr(z);
+			ft_putstr("\n\nVALEUR DE J : ");
+			ft_putnbr(j);
+			ft_putstr("\n\n\n");
+			if (carre[a] == '.' || a % cote != 0)
 			{
-				ft_putstr("\nposition ok");
-				if (i > 0 && i % 4 == 0)
-				{
-			ft_putstr("\n------------------\nJ avant : \n");
-			ft_putnbr(j);
-					j = j + cote + i;
-			ft_putstr("\n\n--------------\nvaleur dans if de i, j, cote : \n");
-			ft_putnbr(i);
-			ft_putstr("\n------------------\n");
-			ft_putnbr(j);
-			ft_putstr("\n------------------\n");
-			ft_putnbr(cote);
-			ft_putstr("\n------------------\n");
-				}
-				else
-				{
-					j = j + i;
-			ft_putstr("\n\n--------------\nvaleur dans else de i, j, cote : \n");
-			ft_putnbr(i);
-			ft_putstr("\n------------------\n");
-			ft_putnbr(j);
-			ft_putstr("\n------------------\n");
-			ft_putnbr(cote);
-			ft_putstr("\n------------------\n");
-				}
 				//j = ft_newpos(j, &pos);
 				hashtag++;
 				ft_putnbr(hashtag);
@@ -212,13 +210,8 @@ int		ft_verifdispo(char *carre, t_elem	*piece, int cote, t_pos pos)
 				hashtag = 0;
 			}
 		}
-		else if (hashtag != 0)
-		{
-			ft_putstr("\nposition ok");
-			j = ft_newpos(j, &pos);
-		}
-		else
-			ft_putstr("\nposition ok");
+		if (i > 0 && i % 4)
+			z = 0;
 		i++;
 	}
 	return (hashtag == 4 ? 1 : 0);
