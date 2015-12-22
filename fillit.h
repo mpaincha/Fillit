@@ -6,7 +6,7 @@
 /*   By: mpaincha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/07 14:31:47 by mpaincha          #+#    #+#             */
-/*   Updated: 2015/12/18 13:50:29 by kvignau          ###   ########.fr       */
+/*   Updated: 2015/12/22 11:50:08 by kvignau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ typedef	struct			s_dbllist
 	struct s_elem		*head;
 }						t_dbllist;
 
-typedef struct			s_pos
+/*typedef struct			s_pos
 {
 	int					ini;
 	int					maxl1;
@@ -49,7 +49,7 @@ typedef struct			s_pos
 	int					min3;
 	int					max4;
 	int					maxl4;
-}						t_pos;
+}						t_pos;*/
 
 int						ft_validite_piece(char *buf);
 int						ft_replace(char *buf, int *hashtag, char lettre);
@@ -65,18 +65,16 @@ void					ft_putlsthead(t_dbllist *list);
 void					ft_putlsttail(t_dbllist *list);
 void					ft_lstdbldel(t_dbllist **list);
 int						ft_sqrtfillit(int n);
-char					*ft_carrevide(int c);
-char					*ft_resolution(char *res, t_dbllist *listpiece,\
+char					*ft_resolution(t_dbllist *listpiece,\
 						int nb_pieces);
-void					ft_affres(char *res, int cote);
-char					*ft_carrevide(int c);
-char					*ft_erase(char lettre, char *carre);
-int						ft_placement(t_elem const *piece, char *carre,\
+void					ft_affres(char **res);
+char					**ft_carrevide(int c);
+char					**ft_erase(char lettre, char **carre);
+int						ft_placement(t_elem const *piece, char **carre,\
 						int cote);
-void					ft_putpiece(char *carre, char *piece, t_pos *pos);
-int						ft_verifdispo(char *carre, t_elem *piece, int cote,\
-						t_pos pos);
-int						ft_newpos(int j, t_pos *pos);
-void					ft_structpos(t_pos *pos, int cote);
+//void					ft_putpiece(char **carre, char *piece, t_pos *pos);
+int						ft_verifdispo(char **carre, t_elem *piece);
+//int						ft_newpos(int j, t_pos *pos);
+//void					ft_structpos(t_pos *pos, int cote);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: mpaincha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/07 15:27:52 by mpaincha          #+#    #+#             */
-/*   Updated: 2015/12/18 13:48:56 by kvignau          ###   ########.fr       */
+/*   Updated: 2015/12/22 11:52:25 by kvignau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,10 @@ int		main(int ac, char **av)
 {
 	t_dbllist	*list_piece;
 	int			ret;
-	char		*res;
 	int			nb_pieces;
 
 	ret = 0;
 	nb_pieces = 0;
-	res = NULL;
 	if (ac == 2)
 	{
 		list_piece = ft_lstdblnew();
@@ -38,7 +36,7 @@ int		main(int ac, char **av)
 		else
 		{
 			ft_putstr("nikel \n"); //debug
-			res = ft_resolution(res, list_piece, nb_pieces);
+			ft_resolution(list_piece, nb_pieces);
 		}
 	}
 	return (0);
