@@ -6,7 +6,7 @@
 /*   By: mpaincha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/11 11:37:37 by mpaincha          #+#    #+#             */
-/*   Updated: 2015/12/22 12:11:31 by kvignau          ###   ########.fr       */
+/*   Updated: 2015/12/22 12:21:21 by kvignau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,6 @@ int		ft_verifdispo(char **carre, t_elem	*piece)
 	int		i;
 	int		hashtag;
 	int		j;
-	//int		poscote;
 	int		a;
 	char	*piece1;
 	int		y;
@@ -136,7 +135,6 @@ int		ft_verifdispo(char **carre, t_elem	*piece)
 	y = 0;
 	x = 0;
 	hashtag = 0;
-	//poscote = cote;
 	ft_putstr("\nwidth : ");
 	ft_putnbr(piece->width);
 	ft_putstr("\nheight : ");
