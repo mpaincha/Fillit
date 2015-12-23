@@ -6,7 +6,7 @@
 /*   By: mpaincha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/11 11:37:37 by mpaincha          #+#    #+#             */
-/*   Updated: 2015/12/23 15:20:35 by mpaincha         ###   ########.fr       */
+/*   Updated: 2015/12/23 15:20:39 by mpaincha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,55 +43,116 @@ void	ft_move(int	*i, int *x, int *y)
 
 int		ft_verifdispo(char **carre, t_elem	*piece, t_pos *pos)
 {
-	int		x;
-	int		y;
-	int		x1;
-	int		y1;
-	int		hash;
-	char	*piece1;
 	int		i;
+	int		hashtag;
+	int		a;
+	int		b;
+	char	*piece1;
+	int		y;
+	int		x;
+	int		debug1; //debug
+	int		debug2; //debug
 
-	x = 0;
-	y = 0;
-	x1 = 0;
-	y1 = 0;
-	hash = 0;
-	i = 0;
 	piece1 = (char *)(piece->content);
-	while (piece1[i] && carre[x + x1][y + y1])
+	a = 0;
+	b = 0;
+	i = 0;
+	y = 0;
+	x = 0;
+	hashtag = 0;
+	debug1 = 0; //debug
+	debug2 = 0; //debug
+	while (carre[a] && carre[a][b] && hashtag != 4)
 	{
-		if (hash == 0 && piece1[i] == '.')
+		debug1 = a + x; //debug
+		debug2 = b + y; //debug
+		ft_putstr("\n--------\nGRANDE BOUCLE - VERIF DISPO : ");
+		ft_putstr("\npos x : ");
+		ft_putnbr(debug1);
+		ft_putstr("\npos y : ");
+		ft_putnbr(debug2);
+		ft_putstr("\n>> Contenu du carre a remplir :  >> "); //debug
+		ft_putchar(carre[a][b]);
+		ft_putstr(" <<\n"); //debug
+		if (carre[a + x][b + y] == '\0')
 		{
-			i++;
-		}
-		else if (piece1[i] == '.')
-		{
-			ft_move(&i, &x, &y);
-			i++;
-		}
-		if (piece1[i] != '.' && carre[x][y] == '.')
-		{
-			hash++;
-			ft_move(&i, &x, &y);
-			i++;
+			ft_putstr("\npos x : ");
+			ft_putnbr(debug1);
+			ft_putstr("\npos y : ");
+			ft_putnbr(debug2);
+			ft_putstr("\n>>>>>Search in a new line :"); //debug
+			a++;
+			b = 0;
 		}
 		else
 		{
-			i = 0;
-			x++;
-			y++;
-			x1 = 0;
-			y1 = 0;;
+			ft_putstr("\n"); //debug
+			while (i < 16 && hashtag != 4) //&& carre[a + x] && carre[a + x][b + y])
+			{
+				if (piece1[i] != '.' && (carre[a + x] == '\0' || carre[a + x][b + y] == '\0'))
+				{
+					ft_putstr("/// BREAK - retour grand boucle \\\\");
+					break ;
+				}
+				if (carre[a + x] && carre[a + x][b + y] && carre[a + x][b + y] != '.' && piece1[i] == '.')
+					ft_move(&i, &x, &y);
+				while (i < 16 && hashtag != 4 && carre[a + x] && carre[a + x][b + y] && carre[a + x][b + y] == '.')
+				{
+					ft_putstr("\nBOUCLE 1 - Emplacement Grd Carre vide : "); //debug
+					if (hashtag == 0 && piece1[i] == '.')
+						break ;
+					else if (piece1[i] == '.')
+					{
+						debug1 = a + x; //debug
+						debug2 = b + y; //debug
+						ft_putstr("\npiece1[i] = . : "); //debug
+						ft_putstr("\ni : "); //debug
+						ft_putnbr(i); //debug
+						ft_putstr("\npos x : "); //debug
+						ft_putnbr(debug1); //debug
+						ft_putstr("\npos y : "); //debug
+						ft_putnbr(debug2); //debug
+						ft_move(&i, &x, &y);
+					}
+					else
+					{
+						hashtag++;
+						debug1 = a + x; //debug
+						debug2 = b + y; //debug
+						ft_putstr("\nBOUCLE 3 : "); //debug
+						ft_putstr("\nposition ok\nnb hashtag : "); //debug
+						ft_putnbr(hashtag); //debug
+						ft_putstr("\ni : "); //debug
+						ft_putnbr(i); //debug
+						ft_putstr("\npos x : "); //debug
+						ft_putnbr(debug1); //debug
+						ft_putstr("\npos y : "); //debug
+						ft_putnbr(debug2); //debug
+						ft_move(&i, &x, &y);
+					}
+				}
+				while (i < 16 && piece1[i] == '.' && hashtag != 4 && carre[a + x] && carre[a + x][b + y])
+				{
+					ft_putstr("\nBOUCLE 4 - emplcmt piece vide"); //debug
+					ft_move(&i, &x, &y);
+					ft_putstr("\ni : "); //debug
+					ft_putnbr(i); //debug
+					ft_putstr("\npos x : "); //debug
+					ft_putnbr(debug1); //debug
+					ft_putstr("\npos y : "); //debug
+					ft_putnbr(debug2); //debug
+				}
+				i++;
+				ft_putendl("\n\n-------HERE-------\n"); //debug
+			}
 		}
 	}
-	if (hash == 4)
+	if (hashtag == 4)
 	{
-		pos->x = x;
-		pos->y = y;
-		return (1);
+		pos->x = a;
+		pos->y = b;
 	}
-	else
-		return (0);
+	return (hashtag == 4 ? 1 : 0);
 }
 
 int		ft_placement(t_elem const *piece, char **carre, int cote)
@@ -121,7 +182,7 @@ int		ft_placement(t_elem const *piece, char **carre, int cote)
 		else
 		{
 			ft_putstr("\n-----------------\nFT_PLACEMENT -- piece a placer\n----------------\n\n"); //debug
-			ft_putstr(tmp->content); //debug
+			ft_putstr(tmp->content); //
 			if (ft_verifdispo(carre, tmp, &pos))
 			{
 				ft_putstr("\n\n>> Emplacement disponible"); //debug
