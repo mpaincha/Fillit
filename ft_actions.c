@@ -6,13 +6,13 @@
 /*   By: mpaincha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/22 15:44:39 by mpaincha          #+#    #+#             */
-/*   Updated: 2015/12/23 15:20:43 by mpaincha         ###   ########.fr       */
+/*   Updated: 2015/12/24 11:08:27 by mpaincha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-void	ft_putpiece(char **carre, char *piece, t_pos pos)
+void	ft_putpiece(char **carre, char *piece, t_pos pos, int cote)
 {
 	int		i;
 	int		a;
@@ -30,13 +30,12 @@ void	ft_putpiece(char **carre, char *piece, t_pos pos)
 		{
 			carre[pos.x + a][pos.y + b] = piece[i];
 			pose++;
-			ft_move(&i, &a, &b);
+			ft_move(&i, &a, &b, cote);
 		}
 		else if (pose != 0 && piece[i] == '.')
 		{
-			ft_move(&i, &a, &b);
+			ft_move(&i, &a, &b, cote);
 		}
-		i++;
 	}
 	ft_putstr("\nNEW CARRE:\n");
 	ft_affres(carre);

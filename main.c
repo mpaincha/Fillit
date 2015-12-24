@@ -6,7 +6,7 @@
 /*   By: mpaincha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/07 15:27:52 by mpaincha          #+#    #+#             */
-/*   Updated: 2015/12/23 12:26:00 by mpaincha         ###   ########.fr       */
+/*   Updated: 2015/12/24 11:08:29 by mpaincha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int		main(int ac, char **av)
 		}
 		else
 		{
-			ft_putstr("nikel \n"); //debug
+			ft_putstr("Fichier valide \n"); //debug
 			ft_resolution(list_piece, nb_pieces);
 		}
 	}
