@@ -6,7 +6,7 @@
 /*   By: mpaincha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/22 15:44:39 by mpaincha          #+#    #+#             */
-/*   Updated: 2015/12/24 11:08:27 by mpaincha         ###   ########.fr       */
+/*   Updated: 2015/12/24 11:44:06 by mpaincha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,6 @@ void	ft_putpiece(char **carre, char *piece, t_pos pos, int cote)
 			ft_move(&i, &a, &b, cote);
 		}
 	}
-	ft_putstr("\nNEW CARRE:\n");
-	ft_affres(carre);
 }
 
 char	**ft_erase(char lettre, char **carre)

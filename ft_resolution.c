@@ -6,7 +6,7 @@
 /*   By: mpaincha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/11 11:37:37 by mpaincha          #+#    #+#             */
-/*   Updated: 2015/12/24 11:08:23 by mpaincha         ###   ########.fr       */
+/*   Updated: 2015/12/24 11:43:26 by mpaincha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	ft_move(int	*i, int *x, int *y, int cote)
 	}
 	else
 	{
-		ft_putstr("a traiter");
+		ft_putstr("\n/!\\ A traiter lorsaue le carre a de plus petit cote /!\\");
 	}
 }
 
@@ -144,16 +144,6 @@ int		ft_verifdispo(char **carre, t_elem	*piece, t_pos *pos, int cote)
 						ft_move(&i, &x, &y, cote);
 						ft_putstr("\ni : "); //debug
 						ft_putnbr(i); //debug
-						debug1 = a + x; //debug
-						debug2 = b + y; //debug
-						ft_putstr("\na : "); //debug
-						ft_putnbr(a); //debug
-						ft_putstr("\nb : "); //debug
-						ft_putnbr(b); //debug
-						ft_putstr("\npos x : "); //debug
-						ft_putnbr(debug1); //debug
-						ft_putstr("\npos y : "); //debug
-						ft_putnbr(debug2); //debug
 					}
 					else
 					{
@@ -182,30 +172,37 @@ int		ft_verifdispo(char **carre, t_elem	*piece, t_pos *pos, int cote)
 					ft_putnbr(x); //debug
 					ft_putstr("\ny : "); //debug
 					ft_putnbr(y); //debug
-						debug1 = a + x; //debug
-						debug2 = b + y; //debug
-						ft_putstr("\na : "); //debug
-						ft_putnbr(a); //debug
-						ft_putstr("\nb : "); //debug
-						ft_putnbr(b); //debug
-						ft_putstr("\npos x : "); //debug
-						ft_putnbr(debug1); //debug
-						ft_putstr("\npos y : "); //debug
-						ft_putnbr(debug2); //debug
+					debug1 = a + x; //debug
+					debug2 = b + y; //debug
 					ft_putstr("\npos x : "); //debug
 					ft_putnbr(debug1); //debug
 					ft_putstr("\npos y : "); //debug
 					ft_putnbr(debug2); //debug
 				}
-				//i++;
+				if (piece1[i] != '.' && carre[a + x][b + y] != '.')
+					break ;
 				ft_putendl("\n\n-------HERE-------\n"); //debug
 			}
 		}
-		else if (carre[a + x][b + y] != '.')
+		if (piece1[i] != '.' && carre[a + x][b + y] != '.')
 		{
 			ft_putstr("\nposition carre prise\n");
+			ft_putstr("\ni : "); //debug
+			ft_putnbr(i); //debug
+			debug1 = a + x; //debug
+			debug2 = b + y; //debug
+			ft_putstr("\npos x : "); //debug
+			ft_putnbr(debug1); //debug
+			ft_putstr("\npos y : "); //debug
+			ft_putnbr(debug2); //debug
+			i = 0;
 			if (carre[a][b + 1])
+			{
 				b++;
+				x = 0;
+				y = 0;
+				hashtag = 0;
+			}
 			else
 			{
 				a++;
