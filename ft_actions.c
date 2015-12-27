@@ -6,7 +6,7 @@
 /*   By: mpaincha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/22 15:44:39 by mpaincha          #+#    #+#             */
-/*   Updated: 2015/12/24 11:44:06 by mpaincha         ###   ########.fr       */
+/*   Updated: 2015/12/27 15:48:43 by mpaincha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,8 @@ void	ft_putpiece(char **carre, char *piece, t_pos pos, int cote)
 			pose++;
 			ft_move(&i, &a, &b, cote);
 		}
-		else if (pose != 0 && piece[i] == '.')
-		{
+		else
 			ft_move(&i, &a, &b, cote);
-		}
 	}
 }
 

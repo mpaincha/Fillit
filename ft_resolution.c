@@ -6,7 +6,7 @@
 /*   By: mpaincha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/11 11:37:37 by mpaincha          #+#    #+#             */
-/*   Updated: 2015/12/27 12:49:54 by mpaincha         ###   ########.fr       */
+/*   Updated: 2015/12/27 15:48:39 by mpaincha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 //verif si carre parfait strictement plus grand que 4 de cote :
 
 void	ft_move(int	*i, int *x, int *y, int cote)
-{
+ {
 	if (cote >= 4)
 	{
 		if (*i >= 11)
@@ -38,7 +38,7 @@ void	ft_move(int	*i, int *x, int *y, int cote)
 		}
 		else
 		{
-			*y = *i + 1;
+			*y = *y + 1;
 			*x = 0;
 		}
 		*i = *i + 1;
@@ -80,13 +80,12 @@ int		ft_verifdispo(char **carre, t_elem	*piece, t_pos *pos, int cote)
 		ft_putstr("\npos y : ");
 		ft_putnbr(debug2);
 		ft_putstr("\n>> Contenu du carre a remplir :  >> "); //debug
-		ft_putchar(carre[a][b]);
+		ft_putchar(carre[a + x][b + y]);
 		ft_putstr(" <<\n"); //debug
 		if (piece1[0] == '.')
-		{
-			ft_putstr("\npiece1[0] = .  \n");
-			i = 1;
-		}
+			i = 0;
+		ft_putstr("\ni : ");
+		ft_putnbr(i);
 		if (carre[a + x][b + y] == '\0')
 		{
 			ft_putstr("\npos x : ");
@@ -99,16 +98,17 @@ int		ft_verifdispo(char **carre, t_elem	*piece, t_pos *pos, int cote)
 			x = 0;
 			y = 0;
 		}
-		else if (carre[a + x][b + y] == '.')
+		else if (carre[a + x][b + y])//== '.')
 		{
 			ft_putstr("\n"); //debug
 			while (i < 16 && hashtag != 4 && carre[a + x])
 			{
+				ft_putstr("\n====>THIS ONE <====\n");
 				if (piece1[i] != '.' && carre[a + x] && carre[a + x][b + y] == '\0')
 				{
 					ft_putstr("/// BREAK - Le piece sort du grd carre \\\\");
 					i = 0;
-					if (carre[a + x] != '\0' && carre[a + x + 1] && carre[a + x][b + y] == '\0')
+					if (carre[a + x + 1])
 					{
 						ft_putstr("//// boucle 2");
 						a++;
@@ -132,8 +132,16 @@ int		ft_verifdispo(char **carre, t_elem	*piece, t_pos *pos, int cote)
 				while (i < 16 && hashtag != 4 && carre[a + x] && carre[a + x][b + y] && carre[a + x][b + y] == '.')
 				{
 					ft_putstr("\nBOUCLE 1 - Emplacement Grd Carre vide : "); //debug
+					ft_putstr("\ni : "); //debug
+					ft_putnbr(i); //debug
 					if (hashtag == 0 && piece1[i] == '.')
+					{
+						if (i != 0)
+							i++;
+						else
+							ft_move(&i, &x, &y, cote);
 						break ;
+					}
 					else if (piece1[i] == '.')
 					{
 						debug1 = a + x; //debug
@@ -160,6 +168,8 @@ int		ft_verifdispo(char **carre, t_elem	*piece, t_pos *pos, int cote)
 						hashtag++;
 						debug1 = a + x; //debug
 						debug2 = b + y; //debug
+						ft_putstr("\ncarre 0 7 : "); //debug
+						ft_putchar(carre[0][7]); //DEBUG BIZARRE
 						ft_putstr("\nBOUCLE 3 : "); //debug
 						ft_putstr("\nposition ok\n>>>>>>>>>>>>>>>>>>>>>> ! <<< NB HASHTAG : "); //debug
 						ft_putnbr(hashtag); //debug
@@ -170,6 +180,12 @@ int		ft_verifdispo(char **carre, t_elem	*piece, t_pos *pos, int cote)
 						ft_putstr("\npos y : "); //debug
 						ft_putnbr(debug2); //debug
 						ft_move(&i, &x, &y, cote);
+						debug1 = a + x; //debug
+						debug2 = b + y; //debug
+						ft_putstr("\npos x : "); //debug
+						ft_putnbr(debug1); //debug
+						ft_putstr("\npos y : "); //debug
+						ft_putnbr(debug2); //debug
 					}
 				}
 				if (i < 16 && piece1[i] == '.' && hashtag != 4 && carre[a + x] && carre[a + x][b + y] == '\0')
@@ -182,6 +198,8 @@ int		ft_verifdispo(char **carre, t_elem	*piece, t_pos *pos, int cote)
 					ft_putnbr(x); //debug
 					ft_putstr("\ny : "); //debug
 					ft_putnbr(y); //debug
+					ft_putstr("\ni : "); //debug
+					ft_putnbr(i); //debug
 					debug1 = a + x; //debug
 					debug2 = b + y; //debug
 					ft_putstr("\npos x : "); //debug
