@@ -6,7 +6,7 @@
 /*   By: mpaincha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/11 11:37:37 by mpaincha          #+#    #+#             */
-/*   Updated: 2015/12/27 15:48:39 by mpaincha         ###   ########.fr       */
+/*   Updated: 2015/12/27 15:57:14 by mpaincha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int		ft_verifdispo(char **carre, t_elem	*piece, t_pos *pos, int cote)
 			i = 0;
 		ft_putstr("\ni : ");
 		ft_putnbr(i);
-		if (carre[a + x][b + y] == '\0')
+	/*	if (carre[a + x][b + y] == '\0')
 		{
 			ft_putstr("\npos x : ");
 			ft_putnbr(debug1);
@@ -98,9 +98,9 @@ int		ft_verifdispo(char **carre, t_elem	*piece, t_pos *pos, int cote)
 			x = 0;
 			y = 0;
 		}
-		else if (carre[a + x][b + y])//== '.')
+		else */if (carre[a + x][b + y])//== '.')
 		{
-			ft_putstr("\n"); //debug
+			ft_putstr("\n"); //debug 
 			while (i < 16 && hashtag != 4 && carre[a + x])
 			{
 				ft_putstr("\n====>THIS ONE <====\n");
