@@ -6,7 +6,7 @@
 /*   By: mpaincha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/11 11:37:37 by mpaincha          #+#    #+#             */
-/*   Updated: 2015/12/27 15:57:14 by mpaincha         ###   ########.fr       */
+/*   Updated: 2015/12/28 15:43:06 by mpaincha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,34 +19,29 @@
 
 void	ft_move(int	*i, int *x, int *y, int cote)
  {
-	if (cote >= 4)
+	(void)cote;
+	
+	if (*i >= 11)
 	{
-		if (*i >= 11)
-		{
-			*y = *i - 11;
-			*x = 3;
-		}
-		else if (*i >= 7)
-		{
-			*y = *i - 7;
-			*x = 2;
-		}
-		else if (*i >= 3)
-		{
-			*y = *i - 3;
-			*x = 1;
-		}
-		else
-		{
-			*y = *y + 1;
-			*x = 0;
-		}
-		*i = *i + 1;
+		*y = *i - 11;
+		*x = 3;
+	}
+	else if (*i >= 7)
+	{
+		*y = *i - 7;
+		*x = 2;
+	}
+	else if (*i >= 3)
+	{
+		*y = *i - 3;
+		*x = 1;
 	}
 	else
 	{
-		ft_putstr("\n/!\\ A traiter lorsque le carre a de plus petit cote /!\\");
+		*y = *y + 1;
+		*x = 0;
 	}
+	*i = *i + 1;
 }
 
 int		ft_verifdispo(char **carre, t_elem	*piece, t_pos *pos, int cote)
@@ -168,8 +163,6 @@ int		ft_verifdispo(char **carre, t_elem	*piece, t_pos *pos, int cote)
 						hashtag++;
 						debug1 = a + x; //debug
 						debug2 = b + y; //debug
-						ft_putstr("\ncarre 0 7 : "); //debug
-						ft_putchar(carre[0][7]); //DEBUG BIZARRE
 						ft_putstr("\nBOUCLE 3 : "); //debug
 						ft_putstr("\nposition ok\n>>>>>>>>>>>>>>>>>>>>>> ! <<< NB HASHTAG : "); //debug
 						ft_putnbr(hashtag); //debug
