@@ -6,14 +6,14 @@
 /*   By: mpaincha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/11 11:37:37 by mpaincha          #+#    #+#             */
-/*   Updated: 2015/12/28 17:39:53 by mpaincha         ###   ########.fr       */
+/*   Updated: 2015/12/29 13:12:35 by kvignau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
 void	ft_move(int *i, int *x, int *y)
- {
+{
 	if (*i >= 11)
 	{
 		*y = *i - 11;
@@ -37,7 +37,7 @@ void	ft_move(int *i, int *x, int *y)
 	*i = *i + 1;
 }
 
-int		ft_verifdispo(char **carre, t_elem *piece, t_pos *pos)
+/*int		ft_verifdispo(char **carre, t_elem *piece, t_pos *pos)
 {
 	int		i;
 	int		hashtag;
@@ -129,25 +129,52 @@ int		ft_verifdispo(char **carre, t_elem *piece, t_pos *pos)
 		pos->y = b;
 	}
 	return (hashtag == 4 ? 1 : 0);
+}*/
+
+int		ft_verifdispo(const char **carre, const t_elem *piece, t_pos pos)
+{
+	const char	*content;
+	int			x;
+	int			y;
+
+	x = 0;
+	content = (const char *)piece->content;
+	while (x < 4)
+	{
+		if (carre[pos.x + x] == NULL)
+			return (0);
+		y = 0;
+		while (y < 4)
+		{
+			if (carre[pos.x + x][pos.y + y] == '\0')
+				return (0);
+			ft_putstr("\n-----CALCUL-----\n");
+			ft_putnbr(x * 4 + y);
+			if (carre[pos.x + x][pos.y + y] != '.' && content[x * 4 + y] != '.')
+				return (0);
+			y++;
+		}
+		x++;
+	}
+	return (1);
 }
 
-int		ft_pluspetit(char **carre, t_pos *pos, t_elem *piece)
+/*int		ft_pluspetit(char **carre, t_pos *pos, t_elem *piece)
 {
 	if (pos->y + 1 == '\0' && pos->x + 1 == '\0')
 		return (1);
-	if (carre[pos->x][pos->y] != '.')
+	while (carre[pos->x] && carre[pos->x][pos->y] != '\0' && piece->content)
 	{
-		if (pos->y + 1 == '\0')
+		if (carre[pos->x][pos->y] != '.')
 		{
-			pos->y = 0;
-			pos->x = pos->x + 1;
+			if (pos->y + 1 == '\0')
+			{
+				pos->y = 0;
+				pos->x = pos->x + 1;
+			}
+			else
+				pos->y = pos->y + 1;
 		}
-		else
-			pos->y = pos->y + 1;
-		return (ft_pluspetit(carre, pos, piece->next));
-	}
-	while (piece->content)
-	{
 		if (ft_verifdispo(carre, piece, pos))
 		{
 			ft_putpiece(carre, piece->content, *pos);
@@ -161,53 +188,53 @@ int		ft_pluspetit(char **carre, t_pos *pos, t_elem *piece)
 			if (ft_pluspetit(carre, pos, piece->next))
 				return (1);
 		}
-		piece = piece->next;
 	}
 	ft_erase(piece->prev->lettre, carre);
 	return (0);
-}
+}*/
 
-/*int		ft_placement(t_elem const *piece, char **carre, int cote)
+int		ft_pluspetit(char **carre, t_elem const *piece)
 {
-	int			x;
-	int			y;
 	t_elem		*tmp;
 	t_pos		pos;
 
-	x = 0;
-	y = 0;
 	tmp = (t_elem *)piece;
 	pos.x = 0;
 	pos.y = 0;
-	while (carre[x] && carre[x][y] != '\0' && tmp->content)
+	while (carre[pos.x])
 	{
-		if (carre[x][y] == '\0' || (carre[x][y] != '.' && carre[x][y + 1] == '\0'))
+		ft_putstr("\n");
+		ft_putstr(piece->content);
+		ft_putstr("\n\n");
+		ft_affres(carre);
+		ft_putstr("\n\n");
+		if (ft_verifdispo((const char **)carre, tmp, pos))
 		{
-			x++;
-			y = 0;
+			ft_putpiece(carre, tmp->content, pos);
+			if (tmp->next == NULL)
+				return (1);
+			if (ft_pluspetit(carre, tmp->next))
+				return (1);
+			carre = ft_erase(tmp->lettre, carre);
 		}
-		else if (carre[x][y] != '.' && carre[x][y + 1] != '\0')
-			y++;
+		if (carre[pos.x][pos.y + 1] == '\0')
+		{
+			pos.x = pos.x + 1;
+			pos.y = 0;
+		}
 		else
-		{
-			if (ft_verifdispo(carre, tmp, &pos))
-			{
-				ft_putpiece(carre, tmp->content, pos);
-				if (tmp->next == NULL)
-					return (1);
-				if (ft_placement(tmp->next, carre, cote))
-					return (1);
-			}
-			else
-				return (0);
-		}
+			pos.y = pos.y + 1;
+		ft_putstr("\n\n---------- POS X -----------\n");
+		ft_putnbr(pos.x);
+		ft_putstr("\n---------- POS Y -----------\n");
+		ft_putnbr(pos.y);
+		ft_putstr("\n\n---------------------\n");
 	}
 	ft_putstr("\n-------------retour------------\n");//debug
-	if(tmp->prev != NULL)
-		carre = ft_erase(tmp->prev->lettre, carre);
+//	if(tmp->prev != NULL)
+//		carre = ft_erase(tmp->prev->lettre, carre);
 	return (0);
 }
-*/
 
 void	ft_resolution(t_dbllist *list_piece, int nb_pieces)
 {
@@ -219,7 +246,7 @@ void	ft_resolution(t_dbllist *list_piece, int nb_pieces)
 	pos.y = 0;
 	cote = ft_sqrtfillit(4 * nb_pieces);
 	res = ft_carrevide(cote);
-	while (ft_pluspetit(res, &pos, list_piece->head))//ft_placement(list_piece->head, res, cote) == 0)
+	while (ft_pluspetit(res, list_piece->head) == 0)//ft_placement(list_piece->head, res, cote) == 0)
 	{
 		cote++;
 		if (res)

@@ -6,7 +6,7 @@
 /*   By: mpaincha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/22 15:44:39 by mpaincha          #+#    #+#             */
-/*   Updated: 2015/12/28 17:40:06 by mpaincha         ###   ########.fr       */
+/*   Updated: 2015/12/29 11:46:18 by kvignau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,14 @@ char	**ft_erase(char lettre, char **carre)
 	j = 0;
 	while (carre[i] != NULL)
 	{
-		while (carre[i][j] != '\0' && carre[i][j] == lettre)
+		while (carre[i][j])
 		{
-			carre[i][j] = '.';
+			if (carre[i][j] == lettre)
+				carre[i][j] = '.';
 			j++;
 		}
 		i++;
+		j = 0;
 	}
 	return (carre);
 }

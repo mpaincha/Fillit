@@ -6,7 +6,7 @@
 /*   By: mpaincha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/07 14:31:47 by mpaincha          #+#    #+#             */
-/*   Updated: 2015/12/28 17:39:57 by mpaincha         ###   ########.fr       */
+/*   Updated: 2015/12/29 12:43:20 by kvignau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ char					**ft_erase(char lettre, char **carre);
 int						ft_placement(t_elem const *piece, char **carre,\
 						int cote);
 void					ft_putpiece(char **carre, char *piece, t_pos pos);
-int						ft_verifdispo(char **carre, t_elem *piece, t_pos *pos);
+int						ft_verifdispo(const char **carre, const t_elem *piece, t_pos pos);
 void					ft_move(int *i, int *x, int *y);
 
 #endif
