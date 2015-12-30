@@ -33,7 +33,17 @@ static void	ft_sizecontent(char *content, t_elem *new_elem)
 			ok = 1;
 		}
 		if (content[i] != '.')
+		{
+			if (i >= 12)
+				lg = i - 12;
+			else if (i >= 8)
+				lg = i - 8;
+			else if (i >= 4)
+				lg = i - 4;
+			else
+				lg = i;
 			lg++;
+		}
 		if (content[i] != '.' && ok)
 		{
 			new_elem->height++;

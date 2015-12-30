@@ -21,8 +21,8 @@
 typedef	struct			s_elem
 {
 	void				*content;
-	size_t				height;
-	size_t				width;
+	unsigned int			height;
+	unsigned int			width;
 	char				lettre;
 	struct s_elem		*prev;
 	struct s_elem		*next;
@@ -62,7 +62,7 @@ char					**ft_erase(char lettre, char **carre);
 int						ft_placement(t_elem const *piece, char **carre,\
 						int cote);
 void					ft_putpiece(char **carre, char *piece, t_pos pos);
-int						ft_verifdispo(const char **carre, const t_elem *piece, t_pos pos);
+int						ft_verifdispo(const char **carre, const t_elem *piece, t_pos pos, int cote);
 void					ft_move(int *i, int *x, int *y);
 
 #endif
