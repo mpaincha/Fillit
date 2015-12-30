@@ -6,7 +6,7 @@
 /*   By: mpaincha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/22 15:44:39 by mpaincha          #+#    #+#             */
-/*   Updated: 2015/12/29 11:46:18 by kvignau          ###   ########.fr       */
+/*   Updated: 2015/12/30 17:11:20 by mpaincha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,12 +65,12 @@ char	**ft_carrevide(int c)
 	char	*col;
 
 	i = 0;
-	j = 0;
 	carre = (char **)malloc(sizeof(char *) * (c + 1));
 	if (carre == NULL)
 		return (NULL);
 	while (i < c)
 	{
+		j = 0;
 		col = (char *)malloc(sizeof(char) * (c + 1));
 		if (col == NULL)
 		{
@@ -78,13 +78,9 @@ char	**ft_carrevide(int c)
 			return (NULL);
 		}
 		while (j < c)
-		{
 			col[j++] = '.';
-		}
 		col[j] = '\0';
-		carre[i] = col;
-		j = 0;
-		i++;
+		carre[i++] = col;
 	}
 	carre[i] = NULL;
 	return (carre);

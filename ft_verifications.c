@@ -6,7 +6,7 @@
 /*   By: mpaincha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/10 11:03:32 by mpaincha          #+#    #+#             */
-/*   Updated: 2015/12/22 18:01:33 by mpaincha         ###   ########.fr       */
+/*   Updated: 2015/12/30 17:56:16 by mpaincha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int		ft_validite_piece(char *buf)
 	{
 		if (buf[i] == '#' && buf[i + 1] == '#')
 			contact++;
-		if (buf[i] == '#'  && buf[i + 5] == '#')
+		if (buf[i] == '#' && buf[i + 5] == '#')
 			contact++;
 		i++;
 	}
@@ -75,7 +75,8 @@ int		ft_replace(char *buf, int *hashtag, char lettre)
 	return (1);
 }
 
-int		ft_validite_fichier(char *fichier, t_dbllist **list_piece, int ret, int *nb_pieces)
+int		ft_validite_fichier(char *fichier, t_dbllist **list_piece, int ret,
+		int *nb_pieces)
 {
 	char	buf[22];
 	int		fd;
@@ -97,7 +98,9 @@ int		ft_validite_fichier(char *fichier, t_dbllist **list_piece, int ret, int *nb
 		*nb_pieces = *nb_pieces + 1;
 		lettre++;
 	}
-	if (close(fd) == -1 || fin != 1 || *nb_pieces > 26 || *nb_pieces == 0)
+	if (*nb_pieces == 0)
+		return (0);
+	if (close(fd) == -1 || fin != 1 || *nb_pieces > 26)
 		return (-2);
 	return (1);
 }

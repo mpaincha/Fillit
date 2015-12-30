@@ -6,7 +6,7 @@
 /*   By: mpaincha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/07 14:31:47 by mpaincha          #+#    #+#             */
-/*   Updated: 2015/12/29 12:43:20 by kvignau          ###   ########.fr       */
+/*   Updated: 2015/12/30 18:02:17 by mpaincha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@
 typedef	struct			s_elem
 {
 	void				*content;
-	unsigned int			height;
-	unsigned int			width;
+	unsigned int		height;
+	unsigned int		width;
 	char				lettre;
 	struct s_elem		*prev;
 	struct s_elem		*next;
@@ -30,7 +30,6 @@ typedef	struct			s_elem
 
 typedef	struct			s_dbllist
 {
-	size_t				length;
 	struct s_elem		*tail;
 	struct s_elem		*head;
 }						t_dbllist;
