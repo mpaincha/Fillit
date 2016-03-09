@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_enregistrement.c                                :+:      :+:    :+:   */
+/*   ft_registry.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mpaincha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/12/10 11:03:20 by mpaincha          #+#    #+#             */
-/*   Updated: 2015/12/18 11:41:17 by kvignau          ###   ########.fr       */
+/*   Created: 2016/01/04 13:35:52 by mpaincha          #+#    #+#             */
+/*   Updated: 2016/01/04 13:35:58 by mpaincha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-void	ft_nettoyage(char *piece)
+static void	ft_cleaning(char *piece)
 {
 	int		i;
 
@@ -39,7 +39,7 @@ void	ft_nettoyage(char *piece)
 	}
 }
 
-void	ft_enregistrement(char *buf, t_dbllist **list_piece, char lettre)
+void		ft_registry(char *buf, t_dbllist **list_piece, char lettre)
 {
 	char		piece[16];
 	int			i;
@@ -55,8 +55,6 @@ void	ft_enregistrement(char *buf, t_dbllist **list_piece, char lettre)
 		i++;
 	}
 	piece[j] = '\0';
-	ft_nettoyage(piece);
-	ft_putstr(piece); //debug
-	ft_putchar('\n'); //debug
+	ft_cleaning(piece);
 	ft_lstdbladd(list_piece, piece, ft_strlen(piece) + 1, lettre);
 }

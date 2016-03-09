@@ -22,7 +22,7 @@ void	ft_lstdbldel(t_dbllist **list)
 		tmp = (*list)->head->next;
 		(*list)->head->height = 0;
 		(*list)->head->width = 0;
-		(*list)->head->lettre = '\0';
+		(*list)->head->letter = '\0';
 		free((*list)->head->content);
 		(*list)->head->content = NULL;
 		free((*list)->head);
@@ -30,4 +30,5 @@ void	ft_lstdbldel(t_dbllist **list)
 	}
 	(*list)->tail = NULL;
 	(*list)->head = NULL;
+	free(*list);
 }

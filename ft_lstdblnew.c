@@ -6,7 +6,7 @@
 /*   By: mpaincha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/09 09:45:18 by mpaincha          #+#    #+#             */
-/*   Updated: 2015/12/12 13:43:10 by mpaincha         ###   ########.fr       */
+/*   Updated: 2015/12/30 17:42:14 by mpaincha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ t_dbllist	*ft_lstdblnew(void)
 		return (NULL);
 	else
 	{
-		list->length = 0;
 		list->tail = NULL;
 		list->head = NULL;
 	}

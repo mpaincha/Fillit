@@ -6,14 +6,72 @@
 /*   By: mpaincha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/11 11:37:37 by mpaincha          #+#    #+#             */
-/*   Updated: 2015/12/28 17:39:53 by mpaincha         ###   ########.fr       */
+/*   Updated: 2016/01/04 10:49:35 by kvignau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-void	ft_move(int *i, int *x, int *y)
- {
+static int		ft_checkvacant(const char **carre, const t_elem *piece,
+				t_pos pos, int side)
+{
+	const char	*content;
+	int			x;
+	int			y;
+
+	x = 0;
+	content = (const char *)piece->content;
+	if (pos.x + (piece->height - 1) >= (unsigned int)side ||
+		pos.y + (piece->width - 1) >= (unsigned int)side)
+		return (0);
+	else
+	{
+		while ((unsigned int)x < piece->height)
+		{
+			y = 0;
+			while ((unsigned int)y < piece->width)
+			{
+				if (carre[pos.x + x][pos.y + y] != '.' &&
+					content[x * 4 + y] != '.')
+					return (0);
+				y++;
+			}
+			x++;
+		}
+	}
+	return (1);
+}
+
+static int		ft_research(char **carre, t_elem const *piece, int side)
+{
+	t_elem		*tmp;
+	t_pos		pos;
+
+	tmp = (t_elem *)piece;
+	pos.x = 0;
+	while (carre[pos.x])
+	{
+		pos.y = 0;
+		while (carre[pos.x][pos.y])
+		{
+			if (ft_checkvacant((const char **)carre, tmp, pos, side))
+			{
+				ft_putpiece(carre, tmp->content, pos);
+				if (tmp->next == NULL)
+					return (1);
+				if (ft_research(carre, tmp->next, side))
+					return (1);
+				carre = ft_erase(tmp->letter, carre);
+			}
+			pos.y = pos.y + 1;
+		}
+		pos.x = pos.x + 1;
+	}
+	return (0);
+}
+
+void			ft_move(int *i, int *x, int *y)
+{
 	if (*i >= 11)
 	{
 		*y = *i - 11;
@@ -37,195 +95,22 @@ void	ft_move(int *i, int *x, int *y)
 	*i = *i + 1;
 }
 
-int		ft_verifdispo(char **carre, t_elem *piece, t_pos *pos)
+void			ft_resolution(t_dbllist *list_piece, int nb_pieces)
 {
-	int		i;
-	int		hashtag;
-	int		a;
-	int		b;
-	char	*piece1;
-	int		y;
-	int		x;
-
-	piece1 = (char *)(piece->content);
-	a = 0;
-	b = 0;
-	i = 0;
-	y = 0;
-	x = 0;
-	hashtag = 0;
-	while (carre[a + x] && carre[a + x][b + y] && hashtag != 4)
-	{
-		if (piece1[0] == '.')
-			i = 0;
-		while (i < 16 && hashtag != 4 && carre[a + x])
-		{
-			if (piece1[i] != '.' && carre[a + x] && carre[a + x][b + y] == '\0')
-			{
-				i = 0;
-				if (carre[a + x + 1])
-				{
-					a++;
-					b = 0;
-					x = 0;
-					y = 0;
-					hashtag = 0;
-				}
-				else
-					return (0);
-				break ;
-			}
-			if (carre[a + x] && carre[a + x][b + y] && carre[a + x][b + y] != '.' && piece1[i] == '.')
-				ft_move(&i, &x, &y);
-			if (carre[a + x][b + y] && carre[a + x][b + y] == '.')
-			{
-				if (hashtag == 0 && piece1[i] == '.')
-				{
-					if (i != 0)
-						i++;
-					else
-						ft_move(&i, &x, &y);
-					break ;
-				}
-				else if (piece1[i] == '.')
-					ft_move(&i, &x, &y);
-				else
-				{
-					hashtag++;
-					ft_move(&i, &x, &y);
-				}
-			}
-			if (i < 16 && piece1[i] == '.' && hashtag != 4 && carre[a + x] && carre[a + x][b + y] == '\0')
-				ft_move(&i, &x, &y);
-			if (piece1[i] != '.' && carre[a + x] && carre [a + x][b + y] && carre[a + x][b + y] != '.')
-				break ;
-		}
-		if (piece1[i] != '.' && carre[a + x] && carre[a + x][b + y] && carre[a + x][b + y] != '.')
-		{
-			if (piece1[0] == '.')
-				i = 1;
-			else
-				i = 0;
-			if (carre[a][b + 1])
-			{
-				b++;
-				x = 0;
-				y = 0;
-				hashtag = 0;
-			}
-			else
-			{
-				a++;
-				b = 0;
-				x = 0;
-				y = 0;
-				hashtag = 0;
-			}
-		}
-	}
-	if (hashtag == 4)
-	{
-		pos->x = a;
-		pos->y = b;
-	}
-	return (hashtag == 4 ? 1 : 0);
-}
-
-int		ft_pluspetit(char **carre, t_pos *pos, t_elem *piece)
-{
-	if (pos->y + 1 == '\0' && pos->x + 1 == '\0')
-		return (1);
-	if (carre[pos->x][pos->y] != '.')
-	{
-		if (pos->y + 1 == '\0')
-		{
-			pos->y = 0;
-			pos->x = pos->x + 1;
-		}
-		else
-			pos->y = pos->y + 1;
-		return (ft_pluspetit(carre, pos, piece->next));
-	}
-	while (piece->content)
-	{
-		if (ft_verifdispo(carre, piece, pos))
-		{
-			ft_putpiece(carre, piece->content, *pos);
-			if (pos->y + 1 == '\0')
-			{
-				pos->y = 0;
-				pos->x = pos->x + 1;
-			}
-			else
-				pos->y = pos->y + 1;
-			if (ft_pluspetit(carre, pos, piece->next))
-				return (1);
-		}
-		piece = piece->next;
-	}
-	ft_erase(piece->prev->lettre, carre);
-	return (0);
-}
-
-/*int		ft_placement(t_elem const *piece, char **carre, int cote)
-{
-	int			x;
-	int			y;
-	t_elem		*tmp;
-	t_pos		pos;
-
-	x = 0;
-	y = 0;
-	tmp = (t_elem *)piece;
-	pos.x = 0;
-	pos.y = 0;
-	while (carre[x] && carre[x][y] != '\0' && tmp->content)
-	{
-		if (carre[x][y] == '\0' || (carre[x][y] != '.' && carre[x][y + 1] == '\0'))
-		{
-			x++;
-			y = 0;
-		}
-		else if (carre[x][y] != '.' && carre[x][y + 1] != '\0')
-			y++;
-		else
-		{
-			if (ft_verifdispo(carre, tmp, &pos))
-			{
-				ft_putpiece(carre, tmp->content, pos);
-				if (tmp->next == NULL)
-					return (1);
-				if (ft_placement(tmp->next, carre, cote))
-					return (1);
-			}
-			else
-				return (0);
-		}
-	}
-	ft_putstr("\n-------------retour------------\n");//debug
-	if(tmp->prev != NULL)
-		carre = ft_erase(tmp->prev->lettre, carre);
-	return (0);
-}
-*/
-
-void	ft_resolution(t_dbllist *list_piece, int nb_pieces)
-{
-	int			cote;
+	int			side;
 	char		**res;
 	t_pos		pos;
 
 	pos.x = 0;
 	pos.y = 0;
-	cote = ft_sqrtfillit(4 * nb_pieces);
-	res = ft_carrevide(cote);
-	while (ft_pluspetit(res, &pos, list_piece->head))//ft_placement(list_piece->head, res, cote) == 0)
+	side = ft_sqrtfillit(4 * nb_pieces);
+	res = ft_emptysquare(side);
+	while (ft_research(res, list_piece->head, side) == 0)
 	{
-		cote++;
+		side++;
 		if (res)
 			ft_memdel((void **)res);
-		res = ft_carrevide(cote);
+		res = ft_emptysquare(side);
 	}
-	ft_putstr("\nRES : \n"); //debug
-	ft_affres(res);
+	ft_showres(res);
 }
